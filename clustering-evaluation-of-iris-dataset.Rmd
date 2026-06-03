@@ -1,0 +1,393 @@
+```{r}
+library(ggplot2)
+library(readr)
+```
+
+```{r}
+rm(list = ls()) ; gc()
+head(iris)
+tail(iris)
+str(iris)
+summary(iris)
+str(iris$Species)
+summary(iris$Species)
+dim(iris)
+```
+
+## Method 1 (Trial and error using preferred K-Means or number of Clusters)
+```{r}
+library(ggplot2)
+data <- iris[,1:4]
+str(data)
+names(data)
+summary(data)
+dim(data)
+plot(data, main = "The legth and width of Sepal and Petal", pch =20, cex =2)
+```
+
+### Perform K-Means with 2 clusters
+```{r}
+km1 = kmeans(data, 2, nstart=100)
+plot(data, col =(km1$cluster +1) , main="K-Means result with 2 clusters", pch=20, cex=2)
+```
+
+### Perform K-Means with 3 clusters
+```{r}
+km2 = kmeans(data, 3, nstart=100)
+plot(data, col =(km2$cluster +1) , main="K-Means result with 3 clusters", pch=20, cex=2)
+```
+
+One solution often used to identifiy the optimal number of clusters is called the Elbow method and it involves observing a set of possible numbers of clusters relative to how they minimise the within-cluster sum of square.
+
+```{r}
+rm(list = ls()) ; gc()
+data <- iris[,1:4]
+tot_wss<-c()
+for (i in 1:15)
+{
+  cl <- kmeans(data, centers=i)     
+  tot_wss[i]<-cl$tot.withinss     
+}
+```
+
+```{r}
+plot(x=1:15,                         
+     y=tot_wss,                      
+     type="b",                      
+     xlab="Number of Clusters",
+     ylab="Within groups sum of squares")
+```
+
+From the above scree plot, we can say that after 2 clusters the observed difference in the within-cluster dissimilarity is not substantial. Consequently, we can say with some reasonable confidence that the optimal number of clusters to be used is 2.
+
+## Method 2 (Clustering based on "NbClust" package)
+Process to compute the “Elbow method” has been enhanced by using NbClust package. This library provides 30 indices for determining the number of clusters and proposes to user the best clustering scheme from the different results obtained by varying all combinations of number of clusters, distance measures, and clustering methods.
+
+```{r}
+rm(list=ls()) ; gc()
+library(factoextra)
+library(NbClust)
+data<-iris[,-c(5)]
+par(mar = c(2,2,2,2))
+nb <- NbClust(data, method = "kmeans")
+```
+```{r}
+hist(nb$Best.nc[1,], breaks = 15)
+```
+```{r}
+fviz_nbclust(nb) + theme_minimal()
+```
+
+Based on the result above; 2 proposed  0 as the best number of clusters, 10 proposed  2 as the best number of clusters, 8 proposed  3 as the best number of clusters, 2 proposed  4 as the best number of clusters, 1 proposed  5 as the best number of clusters, 1 proposed  8 as the best number of clusters, 1 proposed  14 as the best number of clusters, 1 proposed  15 as the best number of clusters. Thus, according to the majority rule, the optimal number of clusters is 2.
+
+```{r}
+fviz_nbclust(data, kmeans, method = "wss") + geom_vline(xintercept = 2, linetype = 2)
+```
+
+## Method 3 (Clustering based on "vegan" package)
+
+```{r}
+rm(list = ls()) ; gc()
+library(vegan)    
+data<-iris[,-c(5)] 
+model <- cascadeKM(data, 1, 10, iter = 100)
+plot(model, sortg = TRUE)
+```
+
+Group membership is indicated by color. Y-axis indicates number of clusters or groups, meanwhile X-axis indicates number of objects. Based on Calinski criterion, the best number of clusters is 3 and this group membership is reperesented by 3 colors (orange, yellow, red).
+
+```{r}
+model$results[2,]   
+which.max(model$results[2,])
+```
+
+## Method 4 (Clustering based on "cluster" package or Silhoutte analysis)
+Silhouette refers to a method of interpretation and validation of consistency within clusters of data. The silhouette value is a measure of how similar an object is to its own cluster (cohesion) compared to other clusters (separation). The silhouette ranges from -1 to +1, where a high value indicates that the object is well matched to its own cluster and poorly matched to neighboring clusters. 
+
+### Comparing 2 Clusters
+```{r}
+rm(list = ls()) ; gc()
+library(cluster)
+head(iris,2)
+cl <- kmeans(iris[,-5], 2)
+dis <- dist(iris[,-5])^2
+sil = silhouette (cl$cluster, dis)
+plot(sil, main = "Silhoutte Analysis of Iris Data Set", col = c("yellow", "red"), ylab="Number of Clusters", xlab="Silhouette Range or Distance")
+```
+
+### Comparing 3 Clusters
+```{r}
+rm(list = ls()) ; gc()
+library(cluster)
+head(iris,2)
+cl <- kmeans(iris[,-5], 3)
+dis <- dist(iris[,-5])^2
+sil = silhouette (cl$cluster, dis)
+plot(sil, main = "Silhoutte Analysis of Iris Data Set", col = c("green", "blue", "purple"), ylab="Number of Clusters", xlab="Silhouette Range or Distance")
+```
+
+### Comparing 5 Clusters
+```{r}
+rm(list = ls()) ; gc()
+library(cluster)
+head(iris,2)
+cl <- kmeans(iris[,-5], 5)
+dis <- dist(iris[,-5])^2
+sil = silhouette (cl$cluster, dis)
+plot(sil, main = "Silhoutte Analysis of Iris Data Set", col = c("yellow", "red", "green", "blue", "purple"), ylab="Number of Clusters", xlab="Silhouette Range or Distance")
+```
+
+There is a summary measure at the bottom of the plot labeled "Average Silhouette Width". This indicates Silhouette Coefficient (SC) and the below table shows how to use the value. Based on the Silhoutte analysis, when the data was divided into two and three clusters, the Average Silhoutte Width was 0.85 and 0.74 respectively. However, it is more appropriate to divide tha data into two clusters because each individual clusters (Cluster 1 and Cluster 2) are having higher Silhouttte Coefecienet (> 0.80).:
+
+Range of SC | Interpretation
+------------- | -------------
+0.71-1.00 | A strong structure has been found
+0.51-0.70 | A reasonable structure has been found 
+0.26-0.50 | The structure is weak and could be artificial
+< 0.25 | No substantial structure has been found 
+
+
+## Assessing Clustering Tendency
+The process of assessing clustering tendency or the feasibility of the clustering analysis is fundamental because this will decide whether any dataset needs to be clustered.
+
+```{r}
+rm(list = ls()) ; gc()
+library(ggplot2)
+library(factoextra)
+library(clustertend)
+```
+
+```{r}
+# Iris data set
+str(iris)
+df <- iris[, -5]
+```
+
+```{r}
+# Random data generated from the iris data set
+random_df <- apply(df, 2, function(x){runif(length(x), min(x), (max(x)))}) 
+random_df <- as.data.frame(random_df)
+```
+
+```{r}
+# Standardize the data sets
+df <- iris.scaled <- scale(df)
+random_df <- scale(random_df)
+```
+
+```{r}
+# Compute Hopkins statistic for iris dataset
+res <- get_clust_tendency(df, n = nrow(df)-1, graph = FALSE)
+res$hopkins_stat
+hopkins(df, n = nrow(iris) -1)
+```
+
+```{r}
+# Compute Hopkins statistic for a random dataset
+res <- get_clust_tendency(random_df, n = nrow(random_df)-1, graph = FALSE)
+res$hopkins_stat
+hopkins(random_df, n = nrow(iris) -1) 
+```
+
+It can be seen that iris dataset (df) is highly clusterable (the H value = 0.19 which is far below the threshold 0.5). Meanwhile, the random dataset (random_df) is not clusterable (the H value = 0.50). This finding is consistent with visual assessment of clustering tendency which was computed using dissimilarity matrix, as shown below. The dissimilarity matrix image confirms that there is a cluster structure in the iris dataset but not in the random dataset.
+
+```{r}
+fviz_dist(dist(df), show_labels = FALSE) + labs(title = "Iris data")
+fviz_dist(dist(random_df), show_labels = FALSE) + labs(title = "Random data")
+``````{r}
+library(ggplot2)
+library(readr)
+```
+
+```{r}
+rm(list = ls()) ; gc()
+head(iris)
+tail(iris)
+str(iris)
+summary(iris)
+str(iris$Species)
+summary(iris$Species)
+dim(iris)
+```
+
+## Method 1 (Trial and error using preferred K-Means or number of Clusters)
+```{r}
+library(ggplot2)
+data <- iris[,1:4]
+str(data)
+names(data)
+summary(data)
+dim(data)
+plot(data, main = "The legth and width of Sepal and Petal", pch =20, cex =2)
+```
+
+### Perform K-Means with 2 clusters
+```{r}
+km1 = kmeans(data, 2, nstart=100)
+plot(data, col =(km1$cluster +1) , main="K-Means result with 2 clusters", pch=20, cex=2)
+```
+
+### Perform K-Means with 3 clusters
+```{r}
+km2 = kmeans(data, 3, nstart=100)
+plot(data, col =(km2$cluster +1) , main="K-Means result with 3 clusters", pch=20, cex=2)
+```
+
+One solution often used to identifiy the optimal number of clusters is called the Elbow method and it involves observing a set of possible numbers of clusters relative to how they minimise the within-cluster sum of square.
+
+```{r}
+rm(list = ls()) ; gc()
+data <- iris[,1:4]
+tot_wss<-c()
+for (i in 1:15)
+{
+  cl <- kmeans(data, centers=i)     
+  tot_wss[i]<-cl$tot.withinss     
+}
+```
+
+```{r}
+plot(x=1:15,                         
+     y=tot_wss,                      
+     type="b",                      
+     xlab="Number of Clusters",
+     ylab="Within groups sum of squares")
+```
+
+From the above scree plot, we can say that after 2 clusters the observed difference in the within-cluster dissimilarity is not substantial. Consequently, we can say with some reasonable confidence that the optimal number of clusters to be used is 2.
+
+## Method 2 (Clustering based on "NbClust" package)
+Process to compute the “Elbow method” has been enhanced by using NbClust package. This library provides 30 indices for determining the number of clusters and proposes to user the best clustering scheme from the different results obtained by varying all combinations of number of clusters, distance measures, and clustering methods.
+
+```{r}
+rm(list=ls()) ; gc()
+library(factoextra)
+library(NbClust)
+data<-iris[,-c(5)]
+par(mar = c(2,2,2,2))
+nb <- NbClust(data, method = "kmeans")
+```
+```{r}
+hist(nb$Best.nc[1,], breaks = 15)
+```
+```{r}
+fviz_nbclust(nb) + theme_minimal()
+```
+
+Based on the result above; 2 proposed  0 as the best number of clusters, 10 proposed  2 as the best number of clusters, 8 proposed  3 as the best number of clusters, 2 proposed  4 as the best number of clusters, 1 proposed  5 as the best number of clusters, 1 proposed  8 as the best number of clusters, 1 proposed  14 as the best number of clusters, 1 proposed  15 as the best number of clusters. Thus, according to the majority rule, the optimal number of clusters is 2.
+
+```{r}
+fviz_nbclust(data, kmeans, method = "wss") + geom_vline(xintercept = 2, linetype = 2)
+```
+
+## Method 3 (Clustering based on "vegan" package)
+
+```{r}
+rm(list = ls()) ; gc()
+library(vegan)    
+data<-iris[,-c(5)] 
+model <- cascadeKM(data, 1, 10, iter = 100)
+plot(model, sortg = TRUE)
+```
+
+Group membership is indicated by color. Y-axis indicates number of clusters or groups, meanwhile X-axis indicates number of objects. Based on Calinski criterion, the best number of clusters is 3 and this group membership is reperesented by 3 colors (orange, yellow, red).
+
+```{r}
+model$results[2,]   
+which.max(model$results[2,])
+```
+
+## Method 4 (Clustering based on "cluster" package or Silhoutte analysis)
+Silhouette refers to a method of interpretation and validation of consistency within clusters of data. The silhouette value is a measure of how similar an object is to its own cluster (cohesion) compared to other clusters (separation). The silhouette ranges from -1 to +1, where a high value indicates that the object is well matched to its own cluster and poorly matched to neighboring clusters. 
+
+### Comparing 2 Clusters
+```{r}
+rm(list = ls()) ; gc()
+library(cluster)
+head(iris,2)
+cl <- kmeans(iris[,-5], 2)
+dis <- dist(iris[,-5])^2
+sil = silhouette (cl$cluster, dis)
+plot(sil, main = "Silhoutte Analysis of Iris Data Set", col = c("yellow", "red"), ylab="Number of Clusters", xlab="Silhouette Range or Distance")
+```
+
+### Comparing 3 Clusters
+```{r}
+rm(list = ls()) ; gc()
+library(cluster)
+head(iris,2)
+cl <- kmeans(iris[,-5], 3)
+dis <- dist(iris[,-5])^2
+sil = silhouette (cl$cluster, dis)
+plot(sil, main = "Silhoutte Analysis of Iris Data Set", col = c("green", "blue", "purple"), ylab="Number of Clusters", xlab="Silhouette Range or Distance")
+```
+
+### Comparing 5 Clusters
+```{r}
+rm(list = ls()) ; gc()
+library(cluster)
+head(iris,2)
+cl <- kmeans(iris[,-5], 5)
+dis <- dist(iris[,-5])^2
+sil = silhouette (cl$cluster, dis)
+plot(sil, main = "Silhoutte Analysis of Iris Data Set", col = c("yellow", "red", "green", "blue", "purple"), ylab="Number of Clusters", xlab="Silhouette Range or Distance")
+```
+
+There is a summary measure at the bottom of the plot labeled "Average Silhouette Width". This indicates Silhouette Coefficient (SC) and the below table shows how to use the value. Based on the Silhoutte analysis, when the data was divided into two and three clusters, the Average Silhoutte Width was 0.85 and 0.74 respectively. However, it is more appropriate to divide tha data into two clusters because each individual clusters (Cluster 1 and Cluster 2) are having higher Silhouttte Coefecienet (> 0.80).:
+
+Range of SC | Interpretation
+------------- | -------------
+0.71-1.00 | A strong structure has been found
+0.51-0.70 | A reasonable structure has been found 
+0.26-0.50 | The structure is weak and could be artificial
+< 0.25 | No substantial structure has been found 
+
+
+## Assessing Clustering Tendency
+The process of assessing clustering tendency or the feasibility of the clustering analysis is fundamental because this will decide whether any dataset needs to be clustered.
+
+```{r}
+rm(list = ls()) ; gc()
+library(ggplot2)
+library(factoextra)
+library(clustertend)
+```
+
+```{r}
+# Iris data set
+str(iris)
+df <- iris[, -5]
+```
+
+```{r}
+# Random data generated from the iris data set
+random_df <- apply(df, 2, function(x){runif(length(x), min(x), (max(x)))}) 
+random_df <- as.data.frame(random_df)
+```
+
+```{r}
+# Standardize the data sets
+df <- iris.scaled <- scale(df)
+random_df <- scale(random_df)
+```
+
+```{r}
+# Compute Hopkins statistic for iris dataset
+res <- get_clust_tendency(df, n = nrow(df)-1, graph = FALSE)
+res$hopkins_stat
+hopkins(df, n = nrow(iris) -1)
+```
+
+```{r}
+# Compute Hopkins statistic for a random dataset
+res <- get_clust_tendency(random_df, n = nrow(random_df)-1, graph = FALSE)
+res$hopkins_stat
+hopkins(random_df, n = nrow(iris) -1) 
+```
+
+It can be seen that iris dataset (df) is highly clusterable (the H value = 0.19 which is far below the threshold 0.5). Meanwhile, the random dataset (random_df) is not clusterable (the H value = 0.50). This finding is consistent with visual assessment of clustering tendency which was computed using dissimilarity matrix, as shown below. The dissimilarity matrix image confirms that there is a cluster structure in the iris dataset but not in the random dataset.
+
+```{r}
+fviz_dist(dist(df), show_labels = FALSE) + labs(title = "Iris data")
+fviz_dist(dist(random_df), show_labels = FALSE) + labs(title = "Random data")
+```
