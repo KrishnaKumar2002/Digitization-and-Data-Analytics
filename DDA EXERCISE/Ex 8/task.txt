@@ -1,0 +1,42 @@
+29
+JUN 2026
+[DDA] Exercise 08 - Distributed Computing - I
+From Apurv Deepak Kulkarni
+
+Dear Students,
+We have uploaded the first exercise for the Big Data module at /projects/p_lv_dda_26/08-DistributedComputing-I. The exercise material is also available at Exercise/08-DistributedComputing-I directory on OPAL. In next tutorial session we will discuss this exercise and provide an introduction to distributed computing concepts. To work with the notebooks on our HPC system, please follow these steps:
+
+Accessing JupyterHub:
+Go to https://jupyterhub.hpc.tu-dresden.de/ and log in
+Click on "Advanced"
+
+Input the configuration as mentioned below:
+Cluster = Barnard
+Nodes = 1
+Number of task = 1
+CPUs per task = 8
+Memory per CPU = 1024 (MB)
+Runtime = 02:00:00
+Project = p_lv_dda_26
+Click "Start"
+
+Copying Exercise Materials:
+Open a Terminal in JupyterHub (File → New → Terminal)
+
+Copy the notebook: cp -r /projects/p_lv_dda_26/08-DistributedComputing-I $HOME/
+The exercise directory will appear in your file browser (View → File Browser - if the file browser is not activated in side bar)
+
+Setting Up the Kernel:
+Navigate to the "08-DistributedComputing-I" folder
+Open: WordOccurenceCountWithMobyDick_skeleton.ipynb
+Run the kernel installation cell: !./install-kernel.sh
+
+After successful kernel installation:
+Reload the notebook page
+Select Kernel: big-data-dda-kernel
+Complete the exercise following the notebook instructions
+
+Please attempt the exercise before our session and come prepared with questions. For any technical issues, contact us via OPAL forum or email.
+
+Best regards,
+DDA Team
