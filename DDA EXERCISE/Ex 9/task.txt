@@ -1,0 +1,52 @@
+Message from course Digitization and Data Analytics: Architectures, Methods, and Consequences - Summer Semester 2026 Written by Apurv Deepak Kulkarni on Jul 6, 2026
+Dear Students,
+
+We have uploaded the second exercise for the distributed computing module (09-DistributedComputing-II) in OPAL.
+
+About the exercise:
+
+We will be exploring some SQL queries and UDF along with map visualization in Apache Spark (PySpark) [1].
+
+Exercises on local machine:
+
+Since we are having issues with HPC, we have prepared a local version so that you can finish your work on your own device. You can find the required files in the OPAL exercise directory.
+For this purpose we have adapted/developed following files:
+local_jupyterhub.sh : Used to setup Jupyterhub docker with required packages and to start the docker. This script is tested only on linux system.
+Localmachine_NYC-Taxi-Trips_skeleton.ipynb : Exercise notebook adapted for local machine run.
+To work with exercise notebooks on local machine, please follow these steps:
+Make the script executable: chmod +x local_jupyterhub.sh>
+Setup Jupyterhub docker: ./local_jupyterhub.sh setup
+Start Jupyterhub docker: ./local_jupyterhub.sh start <path/to/working/directory>
+ Do your work
+Stop Jupyterhub docker: ./local_jupyterhub.sh stop
+Running local_jupyterhub.sh help will also give an idea about how to use it.
+
+Troubleshooting:
+
+If you encounter Docker errors such as failed to register layer, no space left on device, or unlazy requires an applier, the disk may be full. Check and free up space:
+# Check available disk space
+df -h
+
+# Check Docker disk usage
+docker system df
+
+# Remove unused Docker images, containers, and caches (use with caution)
+docker system prune -a -f
+        
+If you encounter issues with displaying the map visualizations, copy paste and run following in any of the cell:
+# Unset the variable, if it is set in your environment
+unset PIP_REQUIRE_VIRTUALENV
+
+# Install the python packages in the user space
+pip install ipywidgets==8.0.0 --user
+pip install jupyter-leaflet --user
+        
+Once the above command is fully executed, reload the browser and rerun the notebook.
+If you have any further questions or issues, please don't hesitate to drop us a line via the OPAL forum or email.
+
+Best regards
+DDA Team
+
+[1] https://spark.apache.org/docs/latest/api/python/index.html
+
+Further messages: https://bildungsportal.sachsen.de/opal/auth/RepositoryEntry/53844639746/CourseNode/101496348285468
