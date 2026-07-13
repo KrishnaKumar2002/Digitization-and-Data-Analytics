@@ -1,0 +1,90 @@
+Digitization and Data Analytics: Architectures, Methods, and Consequences - Summer Semester 2026 Written by Apurv Deepak Kulkarni on Jul 13, 2026
+Dear Students,
+
+We have added the Distributed Computing III exercise. Please find the files at:
+
+Opal: Exercises/Übungen directory
+HPC: /projects/p_lv_dda_26/10-DistributedComputing-III
+Copy the files using: cp -r /projects/p_lv_dda_26/10-DistributedComputing-III $HOME/
+ 
+
+About the Exercise
+
+In Distributed Computing III, we will explore the basic concepts of scalability using Apache Spark. To perform computation we will try to estimate value of Pi using Monte Carlo method. During this computation, we will try to understand the how system scales in both directions (scale-up and scale-out).
+
+Exercise 3.1-3.3
+
+In these exercises, we will explore scalability using JupyterNotebooks. These exercise can be performed on local-machine as well as on HPC (if it is available). Pay attention to the comments present in the JupyterNotebook cell. On a local-machine, you will only be able to explore scale-up (increasing the resources of a single machine/node).
+
+To complete these exercises on,
+
+local-machine:
+Use the local_jupyterhub.sh script from previous exercises to start JupyterHub on your local-machine. Provide the path where your notebooks are saved. For more information about this script, try running local_jupyterhub.sh help.
+Once JupyterHub is started, open the Scalability_skeleton.ipynb notebook in the JupyterHub session.
+Complete the tasks in the notebook.
+Stop the JupyterHub session.
+For more information, review the instructions mentioned in the last news. If you have any questions or issues, please contact us via the OPAL forum or email.
+HPC:
+Launch your session in JupyterHub exactly as mentioned in previous exercises.
+Once JupyterHub session is started, open the terminal and copy the exercise directory to your home directory.
+cp -r /projects/p_lv_dda_26/10-DistributedComputing-III $HOME/
+Open the Scalability_skeleton.ipynb notebook in the JupyterHub session.
+Complete the tasks in the notebook.
+Stop the JupyterHub session.
+For more information, review the instructions mentioned in the last news. If you have any questions or issues, please contact us via the OPAL forum or email.
+Exercise 3.4
+
+In this exercise we will learn about scale-out (more than one node) of spark application on HPC cluster using CLI. Repeat the measurements on Barnard with multiple nodes and discuss the results. For this exercise we will use batch job to perform computation. More information about batch jobs can be found here. This exercise will also be discussed by instructors but students are encouraged to try on their own and present the results in the next exercise.
+
+Exercise Files
+
+The script main.sh submits chained jobs with the last job being submitted for post processing.
+spark.sh initializes configuration, starts the cluster and submits the PySpark job (app.py).
+post_process.py is used to do the post processing of results
+The files are related(or invoked) as follows:
+main.sh
+    |
+    ├─> spark.sh
+    │   |
+    │   └─> app.py
+    │
+    └─> post_process.py
+    
+Preparation
+
+Login to Barnard cluster using SSH. More information can be found in the compendium.
+ssh <your-zih-id>@login2.barnard.hpc.tu-dresden.de
+Once you are on the login node, you can conduct the tasks using BATCH jobs.
+
+Tasks
+
+Scale-up:
+
+Task 1: In app.py,
+edit functionToMeasure to add code for calculating computing time for map and reduce functions,
+complete code to initialize spark-context and stop the same.
+Task 2: In spark.sh,
+find a way to add executor cores and parallelism information.
+Task 3: In post_process.py
+create programming logic to compute speedup,
+programming logic to plot parallelism vs processing time and parallelism vs speedup.
+Task 4:
+Figure out how to run scale-up experiments using main.sh.
+Hint: ./main.sh -h
+Find the best CPU numbers (parallelism) for the setup. Use this to conduct scale-out experiments below.
+Plot the results and explain your outcome.
+Scale-out:
+
+Task 1: (Same as scale-up)
+Task 2: (Same as scale-up)
+Task 3: (Same as scale-up)
+Task 4:
+Figure out how to run scale-out experiments using main.sh.
+Hint: ./main.sh -h.
+Plot the results and explain your outcome.
+If you have any doubts or concerns, please do not hesitate to reach us out via DDA Forum or via email.
+
+Best Regards
+DDA Team
+
+Further messages: https://bildungsportal.sachsen.de/opal/auth/RepositoryEntry/53844639746/CourseNode/101496348285468
