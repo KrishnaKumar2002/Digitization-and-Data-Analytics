@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Distributed Computing II — Digitization & Data Analytics — Complete Study Guide</title>
+<style>
+  @page { margin: 20mm 16mm 20mm 16mm; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    color: #1a1a2e;
+    font-size: 10.5pt;
+    line-height: 1.5;
+  }
+  h1 { color: #0d1b6b; font-size: 22pt; margin-bottom: 4px;}
+  h2 { color: #0d1b6b; font-size: 16pt; border-bottom: 3px solid #4a5fd1; padding-bottom: 4px; margin-top: 26px;}
+  h3 { color: #26339e; font-size: 12.5pt; margin-top: 18px; margin-bottom: 6px;}
+  h4 { color: #3a3a8c; font-size: 11pt; margin-top: 12px; margin-bottom: 4px;}
+  p { margin: 6px 0; text-align: justify; }
+  ul, ol { margin: 6px 0 6px 0; padding-left: 22px; }
+  li { margin: 3px 0; }
+  code, pre {
+    font-family: 'Consolas', monospace;
+    background: #f2f3fb;
+    border-radius: 3px;
+  }
+  code { padding: 1px 4px; font-size: 9.5pt; color: #a5177e; }
+  pre {
+    padding: 8px 10px;
+    border-left: 4px solid #4a5fd1;
+    overflow-x: auto;
+    font-size: 9pt;
+    color: #1a1a2e;
+  }
+  .cover {
+    text-align: center;
+    padding-top: 90px;
+    page-break-after: always;
+  }
+  .cover .tag {
+    display:inline-block; background:#0d1b6b; color:white; padding:6px 18px;
+    border-radius: 20px; font-size: 11pt; letter-spacing:1px; margin-bottom:30px;
+  }
+  .cover h1 { font-size: 30pt; }
+  .cover h2 { border:none; font-size:16pt; color:#4a5fd1; font-weight:normal; }
+  .cover .meta { margin-top: 60px; color:#555; font-size:10.5pt; }
+  .toc { page-break-after: always; }
+  .toc ul { list-style: none; padding-left: 0; }
+  .toc > ul > li { font-weight: 600; margin-top: 10px; }
+  .toc ul ul { padding-left: 20px; font-weight: normal; }
+  .toc a { text-decoration: none; color: #1a1a2e; }
+
+  .section { page-break-before: always; }
+
+  .note-box {
+    background: #eef1fc; border-left: 5px solid #4a5fd1;
+    padding: 10px 14px; margin: 12px 0; border-radius: 4px;
+  }
+  .note-box .label { font-weight:700; color:#0d1b6b; text-transform:uppercase; font-size:9pt; letter-spacing:0.5px;}
+
+  .exam-box {
+    background: #fff6e6; border-left: 5px solid #d18c00;
+    padding: 10px 14px; margin: 12px 0; border-radius: 4px;
+  }
+  .exam-box .label { font-weight:700; color:#a3660a; text-transform:uppercase; font-size:9pt;}
+
+  .research-box {
+    background: #eafaf1; border-left: 5px solid #1e9e5c;
+    padding: 10px 14px; margin: 12px 0; border-radius: 4px;
+  }
+  .research-box .label { font-weight:700; color:#137a44; text-transform:uppercase; font-size:9pt;}
+
+  .diagram-box {
+    background: #fbfbff; border: 1px solid #ccd2f0; border-radius:6px;
+    padding: 14px; margin: 14px 0; text-align:center;
+  }
+  .diagram-caption { font-size: 9pt; color:#555; margin-top:6px; font-style:italic;}
+
+  table { border-collapse: collapse; width: 100%; margin: 10px 0; font-size: 9.5pt;}
+  th, td { border: 1px solid #b9c0e8; padding: 6px 8px; text-align: left; vertical-align: top;}
+  th { background: #0d1b6b; color: white; }
+  tr:nth-child(even) { background: #f2f3fb; }
+
+  .qa {
+    margin: 14px 0; padding: 10px 12px; border: 1px solid #dfe2f5; border-radius: 6px;
+    page-break-inside: avoid;
+  }
+  .qa .q { font-weight: 700; color: #0d1b6b; }
+  .qa .q .qnum { display:inline-block; background:#0d1b6b; color:white; border-radius:50%;
+    width:20px; height:20px; text-align:center; line-height:20px; font-size:9pt; margin-right:8px;}
+  .qa .a { margin-top: 6px; }
+  .tag-pill {
+    display:inline-block; font-size:8pt; padding:2px 8px; border-radius:10px;
+    margin-left:6px; font-weight:600;
+  }
+  .tag-concept { background:#dbe4ff; color:#1c3b9c; }
+  .tag-exam { background:#ffe6b3; color:#8a5300; }
+  .tag-research { background:#c9f2da; color:#0f6b3a; }
+
+  .flex-row { display:flex; justify-content: space-around; align-items:center; gap: 10px; flex-wrap:wrap;}
+  .box {
+    border: 2px solid #4a5fd1; border-radius: 6px; padding: 8px 10px; background:white;
+    font-size: 9.5pt; text-align:center; min-width:80px;
+  }
+  .box.hl { background:#4a5fd1; color:white; font-weight:700; }
+  .arrow { font-size: 18pt; color:#4a5fd1; }
+
+  .cheat-table td, .cheat-table th { font-size: 8.7pt; }
+  .footer-note { font-size: 8pt; color:#888; text-align:center; margin-top: 30px;}
+</style>
+</head>
+<body>
+
+<!-- COVER PAGE -->
+<div class="cover">
+  <span class="tag">TU DRESDEN · MS COMPUTER SCIENCE</span>
+  <h1>Digitization and Data Analytics</h1>
+  <h2>Distributed Computing II — Complete Study Guide</h2>
+  <h2>Hadoop · MapReduce · Spark · Flink · HPC/Big-Data Convergence</h2>
+  <div class="meta">
+    In-depth lecture notes, annotated diagrams, and exam-oriented Q&amp;A<br>
+    (conceptual, comparative, and research-level questions)<br><br>
+    Compiled from: "Digitization and Data Analytics" — Lecture 11, Distributed Computing II, CIDS/ZIH
+  </div>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+<h2>Table of Contents</h2>
+<ul>
+  <li><a href="#s1">1. Foundations: Data Pipeline &amp; Scale-Out Paradigm</a></li>
+  <li><a href="#s2">2. Hadoop &amp; MapReduce</a>
+    <ul>
+      <li><a href="#s2a">2.1 Origins: GFS &amp; MapReduce papers</a></li>
+      <li><a href="#s2b">2.2 Hadoop 1.0 Ecosystem</a></li>
+      <li><a href="#s2c">2.3 HDFS Design Assumptions and Goals</a></li>
+      <li><a href="#s2d">2.4 MapReduce Word-Count Walkthrough</a></li>
+      <li><a href="#s2e">2.5 Limitations &amp; Extensions of MapReduce</a></li>
+    </ul>
+  </li>
+  <li><a href="#s3">3. In-Memory Processing</a></li>
+  <li><a href="#s4">4. Apache Spark</a>
+    <ul>
+      <li><a href="#s4a">4.1 Architecture &amp; Cluster Managers</a></li>
+      <li><a href="#s4b">4.2 Spark Context, Driver, Executors</a></li>
+      <li><a href="#s4c">4.3 RDDs — Resilient Distributed Datasets</a></li>
+      <li><a href="#s4d">4.4 Data Structure Evolution: RDD → DataFrame → Dataset</a></li>
+      <li><a href="#s4e">4.5 Spark Streaming</a></li>
+    </ul>
+  </li>
+  <li><a href="#s5">5. Apache Flink &amp; Stream Processing</a></li>
+  <li><a href="#s6">6. HPC vs. Big Data: Scheduling &amp; Convergence</a></li>
+  <li><a href="#s7">7. Master Comparison Cheat-Sheets</a></li>
+  <li><a href="#s8">8. Exam &amp; Research Q&amp;A Bank</a></li>
+</ul>
+</div>
+
+<!-- SECTION 1 -->
+<div class="section" id="s1">
+<h2>1. Foundations: Data Processing Pipeline &amp; Scale-Out Paradigm</h2>
+
+<h3>1.1 The Data Processing Pipeline (recap)</h3>
+<div class="diagram-box">
+<div class="flex-row">
+  <div class="box">Data Collection</div>
+  <div class="arrow">&#8594;</div>
+  <div class="box">Extraction / Cleaning / Annotation</div>
+  <div class="arrow">&#8594;</div>
+  <div class="box">Integration / Aggregation</div>
+  <div class="arrow">&#8594;</div>
+  <div class="box">Analysis / Modelling</div>
+  <div class="arrow">&#8594;</div>
+  <div class="box">Interpretation</div>
+</div>
+<div class="diagram-caption">Fig. 1.1 — End-to-end pipeline. Cross-cutting concerns throughout: Volume, Veracity, Velocity, Variety (the "V's"), Privacy, and Human Interaction — jointly determining <b>Value</b>.</div>
+</div>
+
+<p>Every stage of the pipeline must cope with the "V" characteristics of Big Data. <b>Volume</b> is the sheer size of data; <b>Velocity</b> is the rate at which it arrives; <b>Variety</b> is heterogeneity of format/source; <b>Veracity</b> is trustworthiness/noise. These four properties, together with privacy constraints and the degree of human-in-the-loop interaction, ultimately determine whether the pipeline produces <i>value</i>.</p>
+
+<h3>1.2 Scale-Out vs. Scale-Up</h3>
+<div class="diagram-box">
+  <div class="flex-row">
+    <div>
+      <b>Scale-Up</b><br>
+      <div class="box hl" style="margin-top:6px;">1 very powerful server</div>
+    </div>
+    <div class="arrow">vs.</div>
+    <div>
+      <b>Scale-Out</b><br>
+      <div class="flex-row" style="max-width:260px;">
+        <div class="box">srv</div><div class="box">srv</div><div class="box">srv</div><div class="box">…</div>
+      </div>
+      <div style="font-size:9pt;color:#555;">hundreds to thousands of commodity machines</div>
+    </div>
+  </div>
+</div>
+
+<p>Rather than relying on a single, expensive, highly reliable machine (scale-up), Big Data infrastructures follow the <b>scale-out paradigm</b>: many (hundreds to thousands) low-cost, commodity machines are used together. The system as a whole must be designed to <b>not rely on any single instance</b> — individual node failure is expected and must be tolerated transparently.</p>
+
+<div class="note-box"><span class="label">Why not just buy better hardware?</span>
+Cost scales super-linearly with single-machine performance (high-end SMPs, exotic interconnects), while commodity components scale roughly linearly in cost per unit of aggregate throughput. Scale-out also gives near-linear increases in both storage and I/O bandwidth as nodes are added — something a single powerful machine cannot do beyond its physical bus/disk limits.
+</div>
+
+</div><!-- end s1 -->
+
+<!-- SECTION 2 -->
+<div class="section" id="s2">
+<h2>2. Hadoop &amp; MapReduce</h2>
+
+<h3 id="s2a">2.1 Origins: The Two Foundational Papers</h3>
+<table>
+<tr><th>Paper</th><th>Authors / Venue</th><th>Contribution</th></tr>
+<tr><td>"The Google File System"</td><td>Ghemawat, Gobioff, Leung — SOSP 2003</td>
+<td>Distributed, fault-tolerant file system for very large files across commodity clusters; foundation later cloned as HDFS</td></tr>
+<tr><td>"MapReduce: Simplified Data Processing on Large Clusters"</td><td>Dean, Ghemawat — OSDI 2004</td>
+<td>Programming model + runtime that hides parallelisation, fault-tolerance, data distribution and load balancing behind two simple functions: <code>map</code> and <code>reduce</code></td></tr>
+</table>
+<p><b>Apache Hadoop</b> is the open-source framework that clones both of these Google systems (HDFS clones GFS; Hadoop MapReduce clones Google's MapReduce). It is designed to process very large amounts of unstructured/complex data on a large number of machines.</p>
+
+<h3 id="s2b">2.2 Hadoop 1.0 Ecosystem</h3>
+<div class="diagram-box">
+<table class="cheat-table">
+<tr><th>Layer</th><th>Components</th></tr>
+<tr><td>Coordination</td><td>ZooKeeper</td></tr>
+<tr><td>Applications / higher-level frameworks</td><td>Workflow (Oozie), Graph (Giraph), SQL/DWH (Hive), Scripting (Pig), …</td></tr>
+<tr><td>Distributed data processing model &amp; job scheduling</td><td>Hadoop MapReduce, HBase (column store)</td></tr>
+<tr><td>Distributed storage</td><td>HDFS</td></tr>
+<tr><td>Serialization</td><td>Avro</td></tr>
+<tr><td>Physical layer</td><td>Shared-nothing cluster of commodity servers</td></tr>
+</table>
+<div class="diagram-caption">Fig. 2.1 — Hadoop is not a single tool, but a layered, interoperable ecosystem: physical storage (HDFS) at the bottom, a processing/scheduling layer (MapReduce, HBase) above it, and specialised higher-level frameworks (Hive, Pig, Giraph, Oozie) on top.</div>
+</div>
+
+<div class="note-box"><span class="label">Key idea</span> The move from "just a function" (map/reduce) to an <b>interoperable framework stack</b> is itself significant: it allows different programming paradigms (SQL-like, graph, scripting, workflow orchestration) to share the same underlying distributed storage and execution engine.</div>
+
+<h3 id="s2c">2.3 HDFS/Hadoop Design Assumptions and Goals</h3>
+<p>These assumptions are the "why" behind almost every Hadoop/HDFS design decision — a very common examination topic.</p>
+<table>
+<tr><th>Assumption / Goal</th><th>Explanation</th></tr>
+<tr><td><b>Hardware failure is the norm</b></td><td>Clusters have hundreds to thousands of commodity servers; at that scale, some component is essentially always failing. The system must detect faults and recover automatically rather than treating failure as exceptional.</td></tr>
+<tr><td><b>Streaming data access</b></td><td>Applications need high-throughput streaming (sequential) access to data, not low-latency random access. HDFS is optimized for batch throughput, not interactive/transactional use.</td></tr>
+<tr><td><b>Large data sets</b></td><td>Designed for tens of millions of files, each ranging from gigabytes to terabytes — i.e., aggregate cluster capacity in the petabyte range.</td></tr>
+<tr><td><b>Moving computation to data</b></td><td>It's cheaper to move a small program to where the (large) data resides than to move large volumes of data to the program. This requires the framework to know data locality (which node/rack holds which block).</td></tr>
+<tr><td><b>Portability</b></td><td>Runs across heterogeneous hardware and software/OS platforms, easing adoption.</td></tr>
+</table>
+
+<div class="exam-box"><span class="label">Typical exam question</span> "Explain why HDFS favours throughput over latency, and how this differs from a classical relational database design." — Answer should connect the streaming-access assumption to batch analytics workloads versus OLTP.</div>
+
+<h3 id="s2d">2.4 MapReduce Word-Count Walkthrough</h3>
+<div class="diagram-box">
+<table class="cheat-table">
+<tr><th>Input</th><th>Splitting</th><th>Mapping</th><th>Shuffling (sync!)</th><th>Reducing</th><th>Result</th></tr>
+<tr>
+<td>"Deer Bear River<br>Car Car River<br>Deer Car Bear"</td>
+<td>3 line-splits (parallel)</td>
+<td>(Deer,1)(Bear,1)(River,1)<br>(Car,1)(Car,1)(River,1)<br>(Deer,1)(Car,1)(Bear,1)</td>
+<td>group by key across all mappers</td>
+<td>Bear:2, Car:3, Deer:2, River:2 (parallel per key)</td>
+<td>Combined final counts</td>
+</tr>
+</table>
+<div class="diagram-caption">Fig. 2.2 — Splitting and Mapping are "pure" parallel stages (no cross-node communication needed). Shuffling is the synchronization point: data must be redistributed across the network so all values for the same key land on the same reducer. Reducing is again parallel per key.</div>
+</div>
+
+<div class="note-box"><span class="label">Why shuffle matters</span> The shuffle phase is the only stage requiring network-wide data movement/synchronization — it is usually the main performance bottleneck of classic MapReduce jobs (disk I/O + network + sort).</div>
+
+<h3 id="s2e">2.5 Limitations and Extensions to MapReduce</h3>
+<p>Geoffrey Fox (Indiana University) classifies MapReduce-style computation into six patterns, showing how far the model has been stretched beyond the original batch use case:</p>
+<table>
+<tr><th>#</th><th>Pattern</th><th>Description</th><th>Typical use</th></tr>
+<tr><td>1</td><td>Map Only</td><td>Purely embarrassingly-parallel map, no reduce/sync</td><td>Image processing, format conversion</td></tr>
+<tr><td>2</td><td>Classic MapReduce</td><td>Map → shuffle → reduce, one pass</td><td>Word count, log analysis</td></tr>
+<tr><td>3</td><td>Iterative MapReduce / Map-Collective</td><td>Repeated map-reduce cycles feeding back into next iteration</td><td>Machine learning (k-means, PageRank), Spark's core strength</td></tr>
+<tr><td>4</td><td>Point-to-Point / Map-Communication</td><td>Local, graph-structured communication instead of global shuffle</td><td>Graph algorithms (Giraph/Pregel-style)</td></tr>
+<tr><td>5</td><td>Map-Streaming</td><td>Maps continuously communicate through message brokers on unbounded event streams</td><td>Storm, Kafka Streams, Flink</td></tr>
+<tr><td>6</td><td>Shared-memory / Map-Communicate</td><td>Workers share state via in-memory structures rather than re-reading from disk</td><td><b>In-memory processing</b> — direct motivation for Spark</td></tr>
+</table>
+
+<div class="research-box"><span class="label">Research angle</span> Classic MapReduce (pattern 2) re-reads/re-writes intermediate results to disk between every stage — disastrous for <i>iterative</i> algorithms (ML, graph) that re-use the same data across many rounds. Patterns 3 and 6 (iteration + shared/in-memory state) are exactly the gap that Apache Spark was built to fill.</div>
+
+</div><!-- end s2 -->
+
+<!-- SECTION 3 -->
+<div class="section" id="s3">
+<h2>3. In-Memory Processing</h2>
+
+<h3>3.1 From Disk-Based to In-Memory Analytics</h3>
+<table>
+<tr><th></th><th>Previously (disk-based)</th><th>Now (in-memory)</th></tr>
+<tr><td>Storage</td><td>Relational DB on disk</td><td>Data held resident in RAM</td></tr>
+<tr><td>Query paradigm</td><td>SQL, but slows down as data grows</td><td>Near real-time analysis, no IO-wait bottleneck</td></tr>
+<tr><td>Enabler</td><td>—</td><td>RAM cost has fallen enough to be viable at scale</td></tr>
+<tr><td>Scope</td><td>Separate compute stages</td><td>Basis for full pipelines: iterations, joins, etc.</td></tr>
+</table>
+<p><b>Historical driver:</b> Business Intelligence (BI) needs. Classic BI reports were submitted and results came back later — the famous <i>"coffee-break analytics"</i> pattern (start a report, go get a coffee, come back to the result). In-memory processing was pursued specifically to eliminate this latency.</p>
+
+<h3>3.2 In-Memory (Hardware-Level) Techniques</h3>
+<div class="diagram-box">
+<div class="flex-row">
+  <div><b>Caching</b><br><div class="box">Data → Cache → Compute</div><div style="font-size:8.5pt;">processor/file/disk/permission caches</div></div>
+  <div><b>Replication</b><br><div class="box">Copy 1 + Copy 2 → Compute</div><div style="font-size:8.5pt;">RAID, CDNs, web/server caches</div></div>
+  <div><b>Prefetching</b><br><div class="box">Predict → Buffer → Compute</div><div style="font-size:8.5pt;">disk read-ahead, Google Earth tiles</div></div>
+</div>
+</div>
+<table>
+<tr><th>Technique</th><th>Limitation</th></tr>
+<tr><td>Caching</td><td>Only works if the "working set" is small (repeated access to the same copies)</td></tr>
+<tr><td>Prefetching</td><td>Only helps when access patterns are predictable</td></tr>
+<tr><td>Replication</td><td>Expensive, and bounded by the capacity of receiving-side machines</td></tr>
+<tr><td>General</td><td>Efficiency always depends on the actual application/workflow behaviour — no one-size-fits-all trick</td></tr>
+</table>
+
+<div class="exam-box"><span class="label">Exam angle</span> Be ready to argue <i>why</i> in-memory processing frameworks (Spark) outperform disk-based MapReduce specifically for <b>iterative</b> workloads: each MapReduce iteration re-reads/re-writes to HDFS, while an in-memory framework keeps the working set (e.g., an RDD) cached in RAM across iterations.</div>
+
+</div><!-- end s3 -->
+
+<!-- SECTION 4 -->
+<div class="section" id="s4">
+<h2>4. Apache Spark</h2>
+
+<h3 id="s4a">4.1 Overview &amp; Architecture</h3>
+<p>Apache Spark is the <b>third generation</b> of scale-out data processing frameworks (after "simple function" MapReduce, and the ecosystem-of-tools Hadoop 1.0 stage): a <b>fast, general-purpose engine</b> for large-scale data processing.</p>
+<ul>
+<li>Created by AMPLab, UC Berkeley (2009); commercialized as <b>Databricks</b></li>
+<li>Written in <b>Scala</b>, licensed under the Apache Foundation, large international open-source community</li>
+<li>Offers a unified stack: <b>Spark SQL, Streaming, GraphX, MLlib, (Spark)R</b> — all on top of <b>Spark Core</b></li>
+<li>Data access via HDFS, Cassandra, HBase, Hive, Tachyon, or any Hadoop-compatible data source</li>
+<li>Runs standalone, or on a cluster manager: <b>Hadoop YARN, Apache Mesos</b>, or on EC2</li>
+</ul>
+
+<div class="diagram-box">
+<div class="flex-row">
+  <div class="box">Spark SQL</div><div class="box">Streaming</div><div class="box">GraphX</div><div class="box">MLlib</div><div class="box">R</div>
+</div>
+<div style="text-align:center; margin:6px 0; font-size:16pt;">&#8595;</div>
+<div class="flex-row"><div class="box hl" style="min-width:60%;">Spark Core (RDD)</div></div>
+<div style="text-align:center; margin:6px 0; font-size:16pt;">&#8595;</div>
+<div class="flex-row"><div class="box" style="min-width:60%;">HDFS / Hadoop Storage</div></div>
+<div style="text-align:center; margin:6px 0; font-size:16pt;">&#8595;</div>
+<div class="flex-row"><div class="box" style="min-width:60%;">Mesos / YARN Resource Manager</div></div>
+<div class="diagram-caption">Fig. 4.1 — Layered Spark stack: high-level libraries sit above a common Spark Core / RDD engine, which relies on HDFS-class storage and a cluster resource manager beneath it.</div>
+</div>
+
+<p>Spark provides a <b>Directed Acyclic Graph (DAG) execution engine</b> supporting cyclic data flow and in-memory computing, plus over 80 high-level operators — usable interactively from Scala, Python, or R shells. Its libraries combine seamlessly within a single application (e.g., run SQL, then feed the result directly into MLlib).</p>
+
+<div class="research-box"><span class="label">Benchmark result (from Spark homepage)</span> For an iterative workload, Hadoop MapReduce took ~110s vs. Spark's ~0.9s for a comparable operation — because MapReduce re-reads/writes disk on every iteration while Spark keeps data cached in memory. As iterations increase (1→30), the runtime gap between Hadoop and Spark widens dramatically (near-linear growth for Hadoop vs. much flatter growth for Spark).</div>
+
+<h3 id="s4b">4.2 Spark-Context: Driver, Cluster Manager, Executors</h3>
+<div class="diagram-box">
+<div class="flex-row">
+  <div class="box">Client / Driver<br>(SparkContext)</div>
+  <div class="arrow">&#8594;</div>
+  <div class="box">Cluster Manager<br>(Master Node)</div>
+  <div class="arrow">&#8594;</div>
+  <div>
+    <div class="box">Worker Node<br>Executor [Cache | Task Task]</div><br>
+    <div class="box">Worker Node<br>Executor [Cache | Task Task]</div>
+  </div>
+</div>
+<pre>./bin/spark-shell --master=mesos://HOST:PORT myAPP</pre>
+<div class="diagram-caption">Fig. 4.2 — SparkContext connects the client to the cluster (local / standalone / Mesos / YARN / EC2). Workflow: (1) connect to cluster manager which allocates resources across applications; (2) acquire executors on worker nodes; (3) ship driver application code to executors; (4) distribute tasks for executors to run independently.</div>
+</div>
+
+<h4>Application isolation</h4>
+<p>Each Spark <b>application has its own private driver and its own executors</b> — even when co-located on the same physical servers. This provides isolation between concurrently running applications sharing cluster storage, but also means Spark applications cannot trivially share cached data with each other (unlike, say, a shared external cache).</p>
+
+<h3 id="s4c">4.3 RDD — Resilient Distributed Dataset</h3>
+<p>RDD is Spark's core abstraction and gives the framework its name-worthy properties:</p>
+<table>
+<tr><th>Property</th><th>Meaning</th></tr>
+<tr><td><b>Resilient</b></td><td>Fault-tolerant via the <b>RDD lineage graph</b>: Spark remembers the sequence of transformations used to build an RDD, so a lost partition can be <i>recomputed</i> from its lineage rather than restored from a replica.</td></tr>
+<tr><td><b>Distributed</b></td><td>Data resides across multiple nodes in the cluster, split into partitions.</td></tr>
+<tr><td><b>Dataset</b></td><td>A collection of partitioned records — primitives, tuples, or arbitrary objects.</td></tr>
+</table>
+<p>Parallelism is controlled by the RDD (e.g. via <code>repartition</code>). Spark tries to schedule computation on already-partitioned data to avoid unnecessary data exchange (data locality optimisation, echoing the Hadoop "move computation to data" principle).</p>
+
+<h4>Transformations vs. Actions</h4>
+<table>
+<tr><th>Type</th><th>Behaviour</th><th>Examples</th></tr>
+<tr><td><b>Transformations</b></td><td><b>Lazy</b> — return another RDD, nothing computed yet</td><td><code>map</code>, <code>filter</code>, <code>flatMap</code></td></tr>
+<tr><td><b>Actions</b></td><td><b>Trigger computation</b> and return a concrete value</td><td><code>collect</code>, <code>reduce</code>, <code>saveAsTextFile</code></td></tr>
+</table>
+
+<div class="diagram-box">
+<pre>lines  = spark.textFile("hdfs://...")                              // RDD
+errors = lines.filter(_.startsWith("ERROR"))                        // Transformation
+errors.filter(_.contains("HDFS")).map(_.split('\t')(3)).collect()   // Transformation(s) + Action</pre>
+<div class="flex-row">
+<div class="box">lines</div><div class="arrow">filter</div>
+<div class="box">errors</div><div class="arrow">filter</div>
+<div class="box">HDFS errors</div><div class="arrow">map</div>
+<div class="box">time fields</div><div class="arrow">collect</div>
+<div class="box hl">output</div>
+</div>
+<div class="diagram-caption">Fig. 4.3 — Each transformation builds a new (immutable) RDD holding a pointer back to its parent — this chain is the lineage graph. Only the final action (<code>collect()</code>) actually triggers execution of the whole chain.</div>
+</div>
+
+<div class="exam-box"><span class="label">Classic exam question</span> "Why are Spark transformations lazy?" — Laziness lets Spark build the full DAG of operations <i>before</i> executing anything, enabling global optimisation (e.g., pipelining narrow transformations, avoiding unnecessary intermediate materialization) and letting the scheduler decide the most data-local/efficient execution plan.</div>
+
+<h3 id="s4d">4.4 Data Structure Evolution: RDD → DataFrame → Dataset</h3>
+<table>
+<tr><th>Structure</th><th>Year</th><th>Characteristics</th></tr>
+<tr><td>RDD</td><td>2011</td><td>Distributed collection of JVM objects; functional operators (map, filter, …); fully type-safe but no schema/optimizer awareness</td></tr>
+<tr><td>DataFrame</td><td>2013</td><td>Distributed collection of <code>Row</code> objects; expression-based operations + UDFs; benefits from Spark's logical-plan optimizer (Catalyst); fast/efficient internal (columnar-ish) representation, but not compile-time type-safe</td></tr>
+<tr><td>Dataset</td><td>2015</td><td>Internally rows, externally typed JVM objects — "best of both worlds": <b>type-safe + fast</b> (combines RDD's compile-time safety with DataFrame's optimizer benefits)</td></tr>
+</table>
+<p>Since Spark 1.4, this enhanced stack (SQL / Python / R / Streaming / Advanced Analytics → DataFrame &amp; Dataset → <b>Tungsten Execution Engine</b>) introduced:</p>
+<ul>
+<li><b>Memory management &amp; binary processing</b>: leveraging known application semantics (schema) to manage memory explicitly, eliminating JVM object overhead and garbage-collection pressure.</li>
+<li><b>Cache-aware computation</b>: algorithms/data structures exploit the CPU memory hierarchy (L1/L2/L3 caches).</li>
+<li><b>Code generation</b>: generating specialized bytecode at runtime to exploit modern compilers/CPUs instead of interpreting generic expression trees.</li>
+</ul>
+
+<div class="research-box"><span class="label">Research angle</span> The RDD→DataFrame→Dataset evolution mirrors a broader trend in big-data engines: trading a small amount of flexibility (arbitrary JVM objects) for large gains in optimizability (a known, structured schema lets the engine apply relational-database-style query optimization and vectorized/compiled execution).</div>
+
+<h3 id="s4e">4.5 Spark Streaming</h3>
+<div class="diagram-box">
+<div class="flex-row">
+  <div class="box">Kafka</div><div class="box">Flume</div><div class="box">HDFS/S3</div><div class="box">Kinesis</div><div class="box">Twitter</div>
+</div>
+<div style="text-align:center;font-size:16pt;">&#8595;</div>
+<div class="flex-row"><div class="box hl">Spark Streaming</div></div>
+<div style="text-align:center;font-size:16pt;">&#8595;</div>
+<div class="flex-row"><div class="box">HDFS</div><div class="box">Databases</div><div class="box">Dashboards</div></div>
+</div>
+<p>Spark Streaming extends Spark Core to streaming sources. Crucially, it does <b>not</b> process events one at a time; instead <b>input is split into "mini-batches"</b> (DStreams), each processed as a small Spark job by the same underlying Spark Engine. It additionally introduces <b>window semantics</b>: a windowed operation is computed periodically over a sliding window across several of these underlying micro-batches (e.g., window of 3 time units, sliding every 1 unit).</p>
+<div class="note-box"><span class="label">Key distinction to remember</span> Spark Streaming = <b>micro-batching</b>, not "true" per-event streaming. This is the crucial architectural contrast with Flink (Section 5).</div>
+
+</div><!-- end s4 -->
+
+<!-- SECTION 5 -->
+<div class="section" id="s5">
+<h2>5. Apache Flink &amp; Stream Processing</h2>
+
+<h3>5.1 Batch vs. Stream Processing Model</h3>
+<table>
+<tr><th></th><th>Batch Processing</th><th>Stream Processing</th></tr>
+<tr><td>Data</td><td>"Fixed" (bounded, stored)</td><td>Streaming through the system (unbounded)</td></tr>
+<tr><td>Query</td><td>Workload of queries run into the system on demand</td><td>Continuous / standing query, always active</td></tr>
+<tr><td>Resources</td><td>Full dataset available</td><td>Limited resources for state (can't hold everything)</td></tr>
+<tr><td>Model</td><td>Query → DB</td><td>Events → Queries (↔ State) → Events</td></tr>
+</table>
+
+<h3>5.2 Stream Processing Alternatives</h3>
+<table>
+<tr><th>System</th><th>Character</th></tr>
+<tr><td><b>Apache Storm</b></td><td>True streaming, low latency, lower throughput. Low-level API (Bolts, Spouts) + Trident for higher-level abstractions.</td></tr>
+<tr><td><b>Spark Streaming</b></td><td>Stream processing layered on top of a batch engine → high throughput but higher latency. Functional API (DStreams), restricted by the underlying batch runtime.</td></tr>
+<tr><td><b>Apache Samza</b></td><td>True streaming, built on Apache Kafka; state is a first-class citizen. Slightly different stream notion; low-level API.</td></tr>
+<tr><td><b>Apache Flink</b></td><td>True streaming with an <i>adjustable</i> latency–throughput trade-off. Rich functional API exploiting the streaming runtime (e.g., rich windowing semantics).</td></tr>
+</table>
+
+<h3>5.3 Apache Flink</h3>
+<ul>
+<li>Large-scale data processing engine, similar in ambition to Spark</li>
+<li>Derived from the earlier academic <b>Stratosphere</b> project</li>
+<li>Supports iterations (machine learning), graph processing, and batch processing — not just streaming</li>
+<li><b>Streams results between operators</b> — i.e., data can flow operator-to-operator without waiting for a whole stage/batch to complete</li>
+</ul>
+<div class="diagram-box">
+<table class="cheat-table">
+<tr><th>Layer</th><th>Examples</th></tr>
+<tr><td>Applications &amp; Languages</td><td>Hive, Cascading, Giraph, Mahout, Pig, Crunch</td></tr>
+<tr><td>Data processing engines</td><td>MapReduce, Flink, Spark, Storm, Tez</td></tr>
+<tr><td>App / resource management</td><td>YARN, Mesos</td></tr>
+<tr><td>Storage / streams</td><td>HDFS, HBase, Kafka</td></tr>
+</table>
+<div class="diagram-caption">Fig. 5.1 — Flink sits at the same "data processing engine" layer as Spark/Storm/MapReduce, reusing the same resource-management (YARN/Mesos) and storage (HDFS/HBase/Kafka) layers.</div>
+</div>
+
+<p>Flink's headline properties: <b>true streaming</b> with adjustable latency/throughput, a rich functional API, <b>flexible windowing semantics</b>, <b>exactly-once processing guarantees</b> using (deliberately small) checkpointed state, and native data-stream outputs.</p>
+
+<div class="diagram-box">
+<div class="flex-row">
+  <div class="box">Event logs (Kafka, RabbitMQ)</div>
+  <div class="arrow">&#8594;</div>
+  <div class="box hl">Flink workers (streaming)</div>
+  <div class="arrow">&#8594;</div>
+  <div class="box">Low-latency windowing, aggregations</div>
+</div>
+<div class="flex-row">
+  <div class="box">Historic data (HDFS, JDBC)</div>
+  <div class="arrow">&#8594;</div>
+  <div class="box hl">Flink workers (batch)</div>
+  <div class="arrow">&#8594;</div>
+  <div class="box">ETL, Graphs, Machine Learning, Relational</div>
+</div>
+<div class="diagram-caption">Fig. 5.2 — Flink treats batch as a special (bounded) case of streaming, unifying both under one runtime (Marton Balassi, data Artisans).</div>
+</div>
+
+<h4>Worked example: stock price stream</h4>
+<div class="diagram-box">
+<p style="text-align:left;">Two raw sources — a socket feed of <code>"HDP, 23.8"</code> strings and a live source of typed <code>StockPrice(SPX, 2113.9)</code> events — are (1) parsed, then (2)/(3) merged from multiple stock sources into (4) one unified <code>StockStream</code>.</p>
+<p style="text-align:left;">That unified stream is then windowed (a 10-second window recomputed every 5 seconds) and split three ways: (2) global <code>MinByPrice</code>, (3) <code>MaxByPrice</code> grouped by symbol, (4) <code>MeanPrice</code> grouped by symbol — demonstrating Flink's flexible, per-key windowed aggregation semantics.</p>
+</div>
+
+<h3>5.4 Spark vs. Flink Streaming — Architectural Contrast</h3>
+<table>
+<tr><th></th><th>Apache Flink</th><th>Spark Streaming</th></tr>
+<tr><td>Model</td><td><b>Native/true streaming</b> — direct API to access events as they arrive</td><td><b>Micro-batching</b> — streaming mapped onto a sequence of short batch processes</td></tr>
+<tr><td>Latency</td><td>Lower, tunable</td><td>Higher (bounded by micro-batch interval)</td></tr>
+<tr><td>Throughput</td><td>High</td><td>High</td></tr>
+</table>
+<div class="diagram-box">
+<b>Native Streaming (Flink):</b> events processed continuously as they arrive (one flow, per-event processing).<br><br>
+<b>Micro-batching (Spark):</b> events are grouped into <code>Batch 1, Batch 2, Batch 3, …</code>; a discrete "Process" step triggers after each batch boundary.
+<div class="diagram-caption">Fig. 5.3 — (after Gorasiya 2019) Native streaming vs. micro-batching: the fundamental architectural split behind most Flink-vs-Spark comparisons.</div>
+</div>
+
+<h4>Benchmark: Karimov et al. (ICDE 2018) — "Benchmarking Distributed Stream Data Processing Systems"</h4>
+<ul>
+<li>Compared Storm, Spark, and Flink implementations of a <b>windowed aggregation</b> query (10-minute tumbling window, grouped SUM) at increasing cluster sizes (2/4/8 nodes) and at both <b>maximum throughput</b> and <b>90% of maximum throughput</b>.</li>
+<li><b>Result:</b> both Spark and Flink scale well with additional nodes (latency variance decreases as cluster size grows). Spark showed a <b>slight latency offset</b> compared to Flink under equivalent load — consistent with its micro-batching architecture adding a small, structural scheduling delay per batch.</li>
+</ul>
+<div class="research-box"><span class="label">Research angle</span> This benchmark is a good citation for any answer arguing that "true streaming" engines are not simply <i>faster</i> in absolute throughput than micro-batch engines, but rather offer a more favourable <b>latency profile</b> at comparable throughput and scaling behaviour — the real trade-off is architectural (per-event vs. per-batch), not raw performance.</div>
+
+<div class="note-box"><span class="label">Application driver</span> True low-latency stream processing (pattern (5) Map-Streaming from Section 2.5) is essential for use cases such as <b>autonomous driving</b> and <b>real-time sensor data analysis</b>, where micro-batch latencies of hundreds of milliseconds to seconds are unacceptable.</div>
+
+<h3>5.5 Big Data Streaming — Use Case: Traffic Monitoring</h3>
+<p>Motivated by the growing availability of sensors and cyber-physical systems (toll gantries, buoys, weather stations, smart meters, robots, wearables, radio telescopes, …). A concrete example:</p>
+<ul>
+<li><b>Applications:</b> toll collection, speed control, traffic-jam detection, route planning</li>
+<li><b>Data collection:</b> fixed toll stations, smartphones (crowd-sourced GPS traces), logistics/fleet tracking (GPS)</li>
+</ul>
+<p>This is a canonical <b>Variety + Velocity</b> problem: heterogeneous sources (fixed sensors vs. mobile phones vs. logistics devices) producing continuous streams that must be fused and analysed close to real time.</p>
+
+</div><!-- end s5 -->
+
+<!-- SECTION 6 -->
+<div class="section" id="s6">
+<h2>6. HPC vs. Big Data: Scheduling &amp; Convergence</h2>
+
+<h3>6.1 Differences between HPC and Big Data Scheduling</h3>
+<table>
+<tr><th></th><th>HPC</th><th>Big Data (e.g., Hadoop)</th></tr>
+<tr><td>Resource control</td><td>Fine-grained (cores, accelerators, memory, wall-clock time, …)</td><td>Coarser-grained, job/task oriented</td></tr>
+<tr><td>Scheduler examples</td><td>Slurm, Grid Engine, Moab, LoadLeveler</td><td>Hadoop v1: integrated scheduler — master <b>Job Tracker</b> communicating with <b>Task Trackers</b> on each node</td></tr>
+<tr><td>Fault handling</td><td>Typically checkpoint/restart at application level</td><td>Job Tracker natively manages/re-schedules failed tasks (fail-safe by design)</td></tr>
+<tr><td>Languages</td><td>C/C++, Fortran; both SIMD and MIMD supported; increasingly Python</td><td>Java, Scala, Python</td></tr>
+<tr><td>Parallel model</td><td>MPI = flexible MIMD (arbitrary communication)</td><td>MapReduce can be classified as an SIMD (single-instruction, multiple-data) style problem — the same map function applied uniformly across data</td></tr>
+</table>
+
+<h3>6.2 Convergence Patterns — Application/User Perspective</h3>
+<ul>
+<li>Traditionally, data and compute were in close proximity (same data center); this is no longer guaranteed in cloud/edge settings.</li>
+<li>"Data concentration" is reduced towards the <b>edge</b> — huge volumes are generated far from the central HPC/cloud facility.</li>
+<li>Developments are driven by the Big Data aspects <b>Velocity, Veracity, Variety</b> (heterogeneous data).</li>
+<li>Dealing with the data "deluge" is <i>harder</i> at the edges of the data space — this is where <b>Edge Computing</b> becomes attractive: pre-process near the source before shipping data centrally.</li>
+<li>Edge devices may themselves produce very high data rates: e.g. microscopes, gene sequencers, sensor networks.</li>
+</ul>
+<div class="diagram-box">
+<p>Distributed edge devices (weather stations, gene sequencers, smartphones, industrial sensors, telescopes, …) ⇄ HPC Center / Cloud, trading off <b>latency &amp; cost</b> against where processing actually happens ("locus of processing": in-situ / in-transit / in-locus).</p>
+<div class="diagram-caption">Fig. 6.1 — BDEC (Big Data and Extreme-scale Computing) view of Volume/Veracity/Velocity/Variety pushing processing decisions outward from the HPC center toward the network edge.</div>
+</div>
+
+<h3>6.3 HPC + HDA (High-end Data Analytics) Workflows</h3>
+<ul>
+<li>Analytics scenarios are <b>not singular applications</b> but complex, multi-step workflows spanning the full data life cycle.</li>
+<li>Need for a <b>"user in the loop"</b>: confirming model iterations or the outcome of predictive analytics before proceeding.</li>
+<li>Potentially <b>highly iterative</b> (reflecting Section 2.5's iterative MapReduce pattern).</li>
+<li>Must be flexible enough to react to changes in the software stack: <b>interoperability of tools</b>, <b>reproducibility of results</b>, <b>adaptability to systems</b>.</li>
+</ul>
+<div class="diagram-box">
+The classic empirical-science loop, annotated with HPC/HDA roles: <b>Observations</b> (from instruments/sensors/records) → <b>Abduction</b> (HDA: discovery of patterns/anomalies, making guesses) → <b>Theories</b> (generation of explanatory hypothesis, formulated as a mathematical model) → <b>Deduction</b> (HPC: executing the model to generate predictions) → <b>Predictions</b> → <b>Induction</b> (HDA: assimilating predictions and data to evaluate the hypothesis) → back to Observations/Reality.
+<div class="diagram-caption">Fig. 6.2 — HPC handles the deductive, compute-heavy simulation side; HDA (Big-Data analytics) handles the inductive/abductive, data-heavy discovery side. Real workflows continuously cycle between the two.</div>
+</div>
+
+<h3>6.4 Software Stacks: Big Data vs. HPC ("Scale-out" vs "Scale-up" software ecosystems)</h3>
+<table>
+<tr><th>Layer</th><th>Data Analytics Ecosystem</th><th>Computational Science (HPC) Ecosystem</th></tr>
+<tr><td>Application</td><td>Mahout, R, applications</td><td>Applications and community codes</td></tr>
+<tr><td>Middleware / Management</td><td>Hive, Pig, Sqoop, Flume, MapReduce, Storm, HBase (key-value), HDFS; ZooKeeper (coordination); Avro (serialization); Cloud services (e.g., AWS)</td><td>FORTRAN/C/C++/IDEs, domain-specific libraries, MPI/OpenMP+accelerator tools, numerical libraries, performance &amp; debugging tools (e.g., PAPI), Lustre parallel file system, batch schedulers (e.g., Slurm), system monitoring tools; Scientific visualisation</td></tr>
+<tr><td>System software</td><td>Virtual machines and cloud services; containers (Kubernetes, Docker); Linux OS variant</td><td>Containers (Singularity, Shifter); Linux OS variant</td></tr>
+<tr><td>Cluster hardware</td><td>Ethernet switches, local node storage, commodity x86 racks</td><td>InfiniBand + Ethernet, SAN + local node storage, x86 racks + GPUs/accelerators, in-situ processing</td></tr>
+</table>
+<div class="note-box"><span class="label">Take-away</span> Both ecosystems solve the same underlying scale-out problem but evolved independently with different priorities: Big Data optimises for <i>elastic, heterogeneous, cost-effective</i> commodity infrastructure and fault tolerance; HPC optimises for <i>tightly-coupled, low-latency, high-bandwidth</i> interconnects (InfiniBand) and numerically intensive workloads.</div>
+
+<h3>6.5 Scheduler Evolution: Convergence in Practice</h3>
+<p><b>Motivation:</b> Big Data frameworks like Hadoop are not "just" data-intensive applications — they can also be seen as more general, <i>service-oriented</i> frameworks. A direct comparison to classic MPI batch jobs is therefore misleading; instead, scheduling should be <b>abstracted out</b> of any specific framework to allow flexible hardware provisioning across both worlds.</p>
+<div class="diagram-box">
+<div class="flex-row">
+  <div class="box">Hadoop scheduler</div><div class="box">MPI scheduler</div>
+</div>
+<div style="text-align:center;">&#8595;&#8595;</div>
+<div class="flex-row"><div class="box hl">Mesos master</div><div class="box">Standby master</div><div class="box">Standby master</div></div>
+<div style="font-size:8.5pt;text-align:center;">(coordinated via ZooKeeper quorum)</div>
+<div style="text-align:center;">&#8595;</div>
+<div class="flex-row">
+  <div class="box">Mesos Agent<br>[Hadoop executor / task]</div>
+  <div class="box">Mesos Agent<br>[MPI executor / task]</div>
+  <div class="box">Mesos Agent<br>[Hadoop + MPI executors]</div>
+</div>
+<div class="diagram-caption">Fig. 6.3 — Apache Mesos as an <b>abstract, two-level scheduler</b>: it offers resources to framework-specific schedulers (Hadoop, MPI), which then decide how to use them, allowing Big-Data and HPC workloads to share the same physical cluster. ZooKeeper provides master-election/coordination and standby masters for high availability.</div>
+</div>
+
+<h4>Diverse workload types on today's HPC systems</h4>
+<ul>
+<li><b>HPDA services and applications</b> (High Performance Data Analytics) — often short, loosely-coupled</li>
+<li><b>Capacity supercomputing jobs</b> (large simulations) — long-running, tightly coupled, wide (up to 100k processes)</li>
+<li><b>Interactive prototyping</b> — short, low process count</li>
+<li><b>Job chains</b> — mapping dependencies between workflow steps</li>
+</ul>
+<div class="diagram-box">
+Plot dimensions: <b>x-axis</b> = number of processes per job (width, 1 → 100k), <b>y-axis</b> = job duration (seconds → weeks). "Tightly coupled parallelism" (e.g., Typical Capability Supercomputing Jobs — long duration, huge width) occupies the opposite corner from "loosely coupled parallelism" (e.g., Job Arrays, HPDA Applications — short, narrow-to-medium width). HPDA Services sit at long duration but low width.
+<div class="diagram-caption">Fig. 6.4 — Job diversity chart (after ScienceDirect 2017). Illustrates why a single, one-size-fits-all scheduler struggles to serve both extremes efficiently.</div>
+</div>
+
+<h4>Management architecture</h4>
+<p>A generic scheduling/management architecture consists of: <b>Job Lifecycle Management</b> (job queues, queue-management policies, job monitoring, job log files) feeding into a <b>Scheduling</b> core (resource-allocation policies, resource allocation decisions, job assignment, job dispatch) which drives the <b>Compute Cluster</b>, all overseen by a <b>Resource Management</b> layer (current resource states, resource monitoring &amp; management, resource management policy) — with both User and Administrator interfaces.</p>
+<p>This surfaces an inherent <b>tension between usability</b> ("easy to use" submission for end users) <b>and the management perspective</b> (enforcing fair-share policies, quotas, priorities, and overall cluster health).</p>
+
+<h4>Scheduler performance comparison</h4>
+<p>Comparative study of major state-of-the-art schedulers — <b>Slurm vs. Grid Engine vs. Mesos vs. Hadoop YARN</b> — measuring scheduling overhead ΔT = T<sub>total</sub> − T<sub>job</sub> as a function of tasks-per-processor <i>n</i>:</p>
+<table>
+<tr><th>Scheduler</th><th>Fitted overhead scaling</th></tr>
+<tr><td>Slurm</td><td>ΔT ≈ 2.2 · n<super>1.3</super></td></tr>
+<tr><td>Grid Engine</td><td>ΔT ≈ 2.8 · n<super>1.3</super></td></tr>
+<tr><td>Mesos</td><td>ΔT ≈ 3.4 · n<super>1.1</super></td></tr>
+<tr><td>Hadoop YARN</td><td>ΔT ≈ 33 · n<super>1</super></td></tr>
+</table>
+<p><b>Modern HPC-native schedulers (Slurm, Grid Engine, Mesos) are up to a factor of ~10 faster</b> than Hadoop YARN in terms of task-scheduling overhead. This matters most for workloads with <b>many small jobs</b>, or <b>long process chains in iterative analysis</b>, where per-task scheduling overhead accumulates.</p>
+
+<div class="exam-box"><span class="label">Exam angle</span> Be able to explain <i>why</i> scheduling overhead matters more for iterative/many-small-task workloads than for a few, large, long-running jobs: fixed per-task overhead is amortized over job runtime for big jobs, but dominates for many small/short tasks.</div>
+
+<h3>6.6 HPDA — Using HPC Idle Resources for Big Data Analytics</h3>
+<p>Core research question: <b>"Why use just one scheduler?"</b></p>
+<ul>
+<li>Highly parallel HPC workloads require large parts of the system to be freed up (drained) before they can be scheduled (to get a large contiguous allocation).</li>
+<li>In principle, the resulting temporary "holes" in the schedule can be <b>filled with small, not time-dependent analytics jobs</b> — i.e., opportunistic co-location of Big Data jobs in HPC idle cycles.</li>
+</ul>
+<p>Reference: M. Mercier, D. Glesser, Y. Georgiou, O. Richard, <i>"Big data and HPC collocation: Using HPC idle resources for Big Data analytics,"</i> IEEE Big Data 2017. Empirically shows that mixing HPC and Big Data workloads on the same system substantially increases overall core utilisation over time compared to running either workload type alone, at the cost of added scheduling complexity.</p>
+
+<div class="research-box"><span class="label">Research angle</span> This is a live, ongoing research area (not a solved problem): opportunistic co-scheduling requires careful interference management (I/O contention, network contention, memory bandwidth contention) so that "filler" Big Data jobs do not degrade the performance of the primary, tightly-coupled HPC simulation jobs they are packed around.</div>
+
+</div><!-- end s6 -->
+
+<!-- SECTION 7 -->
+<div class="section" id="s7">
+<h2>7. Master Comparison Cheat-Sheets</h2>
+
+<h3>7.1 Framework Generations at a Glance</h3>
+<table class="cheat-table">
+<tr><th>Generation</th><th>Representative system(s)</th><th>Core idea</th><th>Weakness addressed by next generation</th></tr>
+<tr><td>1st — batch, disk-based</td><td>Hadoop MapReduce (+HDFS)</td><td>Scale-out, fault-tolerant batch processing of huge datasets on commodity clusters</td><td>Poor for iterative algorithms; heavy disk I/O between stages; only "map+reduce" primitives</td></tr>
+<tr><td>2nd — ecosystem of specialised tools</td><td>Hive, Pig, Giraph, Oozie, HBase (on Hadoop 1.0)</td><td>Higher-level languages/paradigms (SQL, scripting, graph, workflow) reusing shared HDFS/MapReduce substrate</td><td>Still bound to MapReduce's disk-heavy execution model underneath</td></tr>
+<tr><td>3rd — multi-purpose, in-memory</td><td>Apache Spark, Apache Flink</td><td>In-memory (RDD/dataflow) engines with DAG execution, unifying batch, SQL, streaming, graph, and ML in one stack</td><td>Spark's streaming is micro-batch (higher latency); true low-latency streaming still needed (Flink/Storm/Samza)</td></tr>
+</table>
+
+<h3>7.2 Stream Processing Engines</h3>
+<table class="cheat-table">
+<tr><th>System</th><th>Streaming model</th><th>Latency</th><th>Throughput</th><th>API level</th><th>State handling</th></tr>
+<tr><td>Storm</td><td>True streaming</td><td>Low</td><td>Lower</td><td>Low-level (Bolts/Spouts) + Trident</td><td>Limited</td></tr>
+<tr><td>Spark Streaming</td><td>Micro-batching</td><td>Higher</td><td>High</td><td>Functional (DStreams)</td><td>Batch-runtime restricted</td></tr>
+<tr><td>Samza</td><td>True streaming (on Kafka)</td><td>Low</td><td>High</td><td>Low-level</td><td>State is first-class citizen</td></tr>
+<tr><td>Flink</td><td>True streaming, unifies batch as bounded stream</td><td>Low, tunable</td><td>High</td><td>Rich functional API</td><td>Exactly-once, checkpointed small state</td></tr>
+</table>
+
+<h3>7.3 HPC vs. Big Data — Summary Table</h3>
+<table class="cheat-table">
+<tr><th>Dimension</th><th>HPC</th><th>Big Data</th></tr>
+<tr><td>Typical job</td><td>Tightly-coupled simulation (MPI)</td><td>Loosely-coupled, data-parallel analytics</td></tr>
+<tr><td>Scheduler</td><td>Slurm, Grid Engine, Moab, LoadLeveler</td><td>Hadoop Job/Task Tracker, YARN, Mesos</td></tr>
+<tr><td>Interconnect</td><td>InfiniBand, low-latency fabrics</td><td>Ethernet, commodity networking</td></tr>
+<tr><td>Storage</td><td>Lustre (parallel file system), SAN</td><td>HDFS (block-replicated, commodity disks)</td></tr>
+<tr><td>Failure model</td><td>Rare, checkpoint/restart</td><td>Norm, transparently masked by framework</td></tr>
+<tr><td>Programming</td><td>C/C++/Fortran + MPI/OpenMP</td><td>Java/Scala/Python + MapReduce/Spark APIs</td></tr>
+<tr><td>Convergence point</td><td colspan="2">Abstract schedulers (Mesos), HPDA co-location of idle-cycle Big-Data jobs, unified software stacks under containers (Singularity/Docker/Kubernetes)</td></tr>
+</table>
+
+</div><!-- end s7 -->
+
+<!-- SECTION 8: Q&A -->
+<div class="section" id="s8">
+<h2>8. Exam &amp; Research Q&amp;A Bank</h2>
+<p>Questions are grouped by topic and tagged: <span class="tag-pill tag-concept">CONCEPT</span> core definitional understanding, <span class="tag-pill tag-exam">EXAM-STYLE</span> typical written-exam phrasing, <span class="tag-pill tag-research">RESEARCH</span> open-ended / paper-adjacent reasoning.</p>
+
+<h3>8.1 Foundations &amp; Scale-Out</h3>
+
+<div class="qa"><div class="q"><span class="qnum">1</span>Why does Big Data infrastructure prefer the scale-out paradigm over scale-up, given that a single powerful server is architecturally simpler? <span class="tag-pill tag-exam">EXAM-STYLE</span></div>
+<div class="a">Cost of raw compute/storage/IO capacity scales roughly linearly with commodity hardware but super-linearly for high-end single machines (better CPUs, more memory channels, faster buses/interconnects get disproportionately expensive). Scale-out also naturally provides redundancy: since failure is assumed to be constant at scale, a system built from many independent, replaceable nodes can mask individual failures, whereas a scale-up system represents a single point of failure. The trade-off is added software complexity: the application/framework (not the hardware) must handle partitioning, coordination, and fault recovery.</div></div>
+
+<div class="qa"><div class="q"><span class="qnum">2</span>Explain the four "V"s of Big Data and how each one influences pipeline design decisions. <span class="tag-pill tag-concept">CONCEPT</span></div>
+<div class="a"><b>Volume</b> forces distributed storage/partitioning (HDFS blocks). <b>Velocity</b> forces stream/near-real-time processing choices (Flink/Storm rather than nightly batch). <b>Variety</b> forces schema-flexible storage/integration steps (the "Extraction/Cleaning/Annotation" and "Integration/Aggregation" pipeline stages exist largely because of variety). <b>Veracity</b> forces validation/cleaning steps and probabilistic/robust analysis methods, since noisy or unreliable data undermines downstream conclusions. Privacy and human interaction are cross-cutting constraints layered on top of all four.</div></div>
+
+<h3>8.2 Hadoop &amp; MapReduce</h3>
+
+<div class="qa"><div class="q"><span class="qnum">3</span>List and explain the five core assumptions/goals behind the HDFS design. Why does each one make HDFS unsuitable as a drop-in replacement for a transactional database? <span class="tag-pill tag-exam">EXAM-STYLE</span></div>
+<div class="a">(1) Hardware failure is the norm — HDFS assumes constant node/disk failure and replicates blocks automatically; a DB typically assumes rare failure and relies on RAID/backup. (2) Streaming data access — optimized for high sequential throughput, not random low-latency reads/writes required by OLTP. (3) Large data sets — tuned for large block sizes (historically 64–128MB) and millions of very large files, inefficient for many small records/rows. (4) Moving computation to data — the execution model (MapReduce) is designed around data-local scheduling, unlike a DB's client-issues-query model. (5) Portability — runs on heterogeneous commodity hardware, trading some performance for flexibility, unlike a DB tuned to specific hardware/storage engines. Together these make HDFS excellent for large-scale batch analytics but poor for low-latency transactional workloads (no ACID transactions, no efficient random updates).</div></div>
+
+<div class="qa"><div class="q"><span class="qnum">4</span>In the MapReduce word-count example, which stage requires network-wide synchronization, and why is this typically the performance bottleneck? <span class="tag-pill tag-concept">CONCEPT</span></div>
+<div class="a">The <b>shuffle</b> stage. Splitting and Mapping are "pure" parallel (each split/map task works purely on its local partition, no cross-node coordination). Shuffling must redistribute all intermediate key-value pairs across the network so that every value for a given key ends up at the same reducer — this requires sorting, network transfer, and often spilling to disk, making it I/O- and network-bound, unlike the embarrassingly-parallel map/reduce compute stages.</div></div>
+
+<div class="qa"><div class="q"><span class="qnum">5</span>Geoffrey Fox identifies six MapReduce-derived computation patterns. Which two patterns most directly motivated the creation of Apache Spark, and why? <span class="tag-pill tag-research">RESEARCH</span></div>
+<div class="a">Pattern 3 (Iterative MapReduce / Map-Collective) and Pattern 6 (Shared-memory Map-Communicates). Classic MapReduce (Pattern 2) forces a fresh read from and write to disk (typically HDFS) between every map-reduce round; for algorithms that iterate many times over the same dataset (e.g., k-means, PageRank, gradient descent), this disk round-trip cost is repeated needlessly on every iteration. Spark's RDDs directly address this by keeping data cached in memory across iterations (Pattern 6's "shared memory" idea) while still supporting the iterative control flow of Pattern 3 — this is precisely why Spark's own benchmark shows growing speedup over Hadoop as the number of iterations increases.</div></div>
+
+<div class="qa"><div class="q"><span class="qnum">6</span>Why is MapReduce classified as an SIMD-style problem when contrasted with MPI/HPC workloads? <span class="tag-pill tag-exam">EXAM-STYLE</span></div>
+<div class="a">In MapReduce, the exact same map function (a single "instruction stream") is applied uniformly and independently to many different pieces of data (multiple data streams) — matching the Single-Instruction-Multiple-Data pattern. Classic MPI/HPC programs, by contrast, are typically MIMD: independent processes can run different code paths and communicate arbitrarily (point-to-point, collective operations), giving far more flexibility but also far more complexity than MapReduce's constrained model.</div></div>
+
+<h3>8.3 In-Memory Processing</h3>
+
+<div class="qa"><div class="q"><span class="qnum">7</span>What was the historical business driver for in-memory processing, and what does "coffee-break analytics" refer to? <span class="tag-pill tag-concept">CONCEPT</span></div>
+<div class="a">Business Intelligence (BI). Classical disk/relational-DB-based analytic reports were slow enough that a user would submit a query, then literally go get a coffee while waiting for results ("coffee-break analytics"). Falling RAM prices made it economically feasible to keep working datasets resident in memory at scale, removing the IO-wait bottleneck and enabling near-real-time analysis.</div></div>
+
+<div class="qa"><div class="q"><span class="qnum">8</span>Caching, replication, and prefetching are all hardware-level techniques to hide IO latency. Give one concrete limitation for each, and explain why none of them alone is sufficient for general Big Data analytics workloads. <span class="tag-pill tag-exam">EXAM-STYLE</span></div>
+<div class="a">Caching only helps if the "working set" is small enough to fit in the cache and is accessed repeatedly — a full scan over a petabyte-scale dataset does not benefit. Prefetching only helps if access patterns are predictable; ad-hoc analytical queries often have irregular access patterns. Replication is expensive (extra storage + write overhead) and bounded by receiving-side machine capacity. Because their effectiveness is workload-dependent, none is a general solution; this is exactly why full in-memory <i>processing frameworks</i> (like Spark, which explicitly caches computed RDDs based on the application's own knowledge of reuse) outperform relying on generic hardware-level tricks alone.</div></div>
+
+<h3>8.4 Apache Spark</h3>
+
+<div class="qa"><div class="q"><span class="qnum">9</span>Define an RDD and explain how it achieves fault tolerance without needing full data replication. <span class="tag-pill tag-concept">CONCEPT</span></div>
+<div class="a">An RDD (Resilient Distributed Dataset) is an immutable, partitioned collection of records distributed across a cluster. Fault tolerance comes from the <b>lineage graph</b>: Spark records the sequence of deterministic transformations used to derive each RDD from its parent(s)/source data. If a partition is lost (e.g., a worker node fails), Spark can <i>recompute</i> just that partition by re-applying the recorded transformations to the still-available parent data/source, rather than needing to keep redundant physical replicas of every intermediate result (as HDFS does for raw storage).</div></div>
+
+<div class="qa"><div class="q"><span class="qnum">10</span>Distinguish transformations from actions in Spark, and explain the practical consequence of transformations being lazy. <span class="tag-pill tag-exam">EXAM-STYLE</span></div>
+<div class="a">Transformations (<code>map</code>, <code>filter</code>, …) produce a new RDD description but do not execute anything immediately — they are lazily queued. Actions (<code>collect</code>, <code>reduce</code>, <code>saveAsTextFile</code>, …) trigger actual execution of the entire chain of pending transformations and return/persist a concrete result. Because execution is deferred, Spark can see the <i>whole</i> DAG of operations before running anything, allowing it to optimise the physical execution plan (e.g., pipeline several narrow transformations into a single pass, avoid materializing intermediate results that are never separately needed, and schedule tasks to maximise data locality).</div></div>
+
+<div class="qa"><div class="q"><span class="qnum">11</span>Why did Spark introduce DataFrames and then Datasets on top of the original RDD API? What specific engineering techniques (since v1.4) made this possible? <span class="tag-pill tag-research">RESEARCH</span></div>
+<div class="a">RDDs operate on arbitrary, opaque JVM objects — Spark's optimizer has no visibility into their internal structure, so it cannot apply relational-style query optimisation. DataFrames introduce a known schema (rows of typed columns), enabling Spark's Catalyst optimizer to build and rewrite logical query plans much like a traditional database engine — but at the cost of losing compile-time type safety (errors surface only at runtime). Datasets recover type safety by using typed JVM objects <i>externally</i> while representing data internally as rows, thus getting DataFrame-style optimisation "for free" while still catching type errors at compile time — the "best of both worlds." This was enabled by the <b>Tungsten execution engine</b>: explicit, application-aware (schema-aware) binary memory management that bypasses JVM object/garbage-collection overhead; cache-aware algorithms/data structures that exploit the CPU cache hierarchy; and runtime code generation that compiles expression trees into specialized bytecode rather than interpreting them generically.</div></div>
+
+<div class="qa"><div class="q"><span class="qnum">12</span>Why does each Spark application get its own private driver and executors, and what is a downside of this isolation model? <span class="tag-pill tag-research">RESEARCH</span></div>
+<div class="a">Per-application isolation ensures that one application's failures, resource usage, or bugs cannot directly corrupt or starve another concurrently-running application on the same cluster — each has independently managed executors and its own scheduling within the cluster manager's overall resource allocation. The downside is that this makes it harder to <i>share</i> cached, in-memory data between separate applications: caching benefits are scoped per-application, so if two different jobs need the same hot dataset, each must independently load/cache it (unless an external shared store — e.g., Alluxio/Tachyon — is used to bridge that gap).</div></div>
+
+<h3>8.5 Streaming: Spark vs. Flink</h3>
+
+<div class="qa"><div class="q"><span class="qnum">13</span>Explain the fundamental architectural difference between Spark Streaming and Apache Flink's streaming model, and why this leads to different latency characteristics. <span class="tag-pill tag-exam">EXAM-STYLE</span></div>
+<div class="a">Spark Streaming implements streaming as a sequence of small <b>micro-batches</b> (DStreams): incoming data is buffered over a short interval, then processed as a normal (small) Spark batch job, and results emitted at the batch boundary. Flink implements <b>native/true streaming</b>: each event is processed by the runtime as it arrives, with results able to flow continuously between operators without waiting for an artificial batch boundary. Because Spark's minimum latency is bounded below by its micro-batch interval (you cannot get a result faster than one batch period), while Flink's latency is determined per-event by the actual processing pipeline, Flink can offer lower and more finely tunable latency, at a comparable throughput, for the same workload — as confirmed empirically by Karimov et al.'s ICDE 2018 benchmark, which found a slight latency offset for Spark relative to Flink at equivalent throughput and cluster scale.</div></div>
+
+<div class="qa"><div class="q"><span class="qnum">14</span>Why does Flink treat batch processing as a "special case" of stream processing rather than the reverse? What does this unification buy Flink architecturally? <span class="tag-pill tag-research">RESEARCH</span></div>
+<div class="a">A batch is simply a stream that happens to be <i>bounded</i> (has a known end), whereas a stream in the general case is <i>unbounded</i>. Modeling batch as bounded-stream lets Flink use one single execution engine and API surface for both ETL/graph/ML batch workloads and low-latency windowed streaming workloads (as shown in the "Flink in the Analytics Ecosystem" diagram, where both event logs and historic data flow through the same Flink core). Spark instead does the reverse — it builds streaming (DStreams) as a layer of repeated small batches on top of a fundamentally batch-oriented core — which is architecturally simpler to build initially but structurally limits how low latency can go.</div></div>
+
+<div class="qa"><div class="q"><span class="qnum">15</span>What does "exactly-once processing guarantee with small state" mean in the context of Flink, and why is this a hard problem in a distributed streaming system? <span class="tag-pill tag-concept">CONCEPT</span></div>
+<div class="a">"Exactly-once" means each input event affects the final result state precisely once — not zero times (data loss on failure) and not more than once (duplicate processing after a restart/failure). This is hard because streaming state (e.g., a running aggregate/window) is continuously mutated across many distributed operators; if a node fails mid-stream, the system must be able to restore state and replay only the exact right set of unprocessed events, without either losing updates or double-applying them. Flink achieves this via distributed, consistent checkpointing of operator state (e.g., using the Chandy–Lamport-style snapshot algorithm), keeping the checkpointed state deliberately small/efficient so checkpointing does not itself become a throughput bottleneck.</div></div>
+
+<h3>8.6 HPC and Big Data Convergence</h3>
+
+<div class="qa"><div class="q"><span class="qnum">16</span>Explain why comparing a Hadoop job directly to an MPI job is described in the lecture as "misleading." <span class="tag-pill tag-exam">EXAM-STYLE</span></div>
+<div class="a">MPI jobs are typically tightly-coupled, long-running, tightly-synchronized parallel simulations that need a large block of dedicated, homogeneously-allocated resources for their full duration. Hadoop-class Big Data frameworks are better understood as <i>service-oriented</i> frameworks (long-lived clusters continuously accepting and scheduling many independent, loosely-coupled analytics tasks), not as single monolithic parallel jobs. Comparing "one Hadoop job" to "one MPI job" therefore compares the wrong units — the meaningful comparison is at the level of the underlying scheduling/resource-management abstraction (which is why frameworks like Mesos try to abstract scheduling out of any single framework, exposing raw resources to both Hadoop and MPI schedulers).</div></div>
+
+<div class="qa"><div class="q"><span class="qnum">17</span>Why do modern schedulers like Slurm and Mesos have measured task-scheduling overhead roughly an order of magnitude lower than Hadoop YARN, and in which workloads does this matter most? <span class="tag-pill tag-research">RESEARCH</span></div>
+<div class="a">The benchmarked overhead ΔT = T_total − T_job scales as ΔT ≈ c·n^k in tasks-per-processor n, with fitted constants roughly 2.2–3.4 for Slurm/Grid Engine/Mesos versus about 33 for Hadoop YARN (with a similar exponent). Even though the underlying causes are implementation-specific (YARN's resource-negotiation protocol involves more overhead per task dispatch/heartbeat than HPC-native schedulers optimized for rapid task turnover), the practical consequence is the same: this overhead is a roughly fixed cost paid <i>per task</i>. For a small number of large, long-running jobs, this fixed per-task cost is negligible relative to total runtime. But for workloads composed of <b>many small tasks</b> or <b>long chains of dependent tasks</b> in iterative analysis pipelines, the accumulated overhead can become a dominant fraction of total wall-clock time — exactly the HPDA/iterative-analytics scenario the lecture highlights.</div></div>
+
+<div class="qa"><div class="q"><span class="qnum">18</span>Describe the core idea behind using HPC idle resources for Big Data analytics (HPDA), and identify one practical risk of this approach. <span class="tag-pill tag-research">RESEARCH</span></div>
+<div class="a">Highly parallel, tightly-coupled HPC jobs often require the scheduler to drain/free large contiguous blocks of the cluster before they can start, temporarily leaving "holes" of otherwise-idle resources. Mercier et al. (IEEE Big Data 2017) propose deliberately filling these holes with small, not-time-critical Big Data analytics jobs, improving overall cluster utilisation without displacing the primary HPC workload. The practical risk is <b>interference</b>: even though the "filler" jobs are scheduled into ostensibly idle compute slots, they can still compete for shared resources — network bandwidth, parallel filesystem I/O, memory bandwidth, or cache — with neighbouring, still-running HPC jobs, potentially causing subtle performance degradation ("noisy neighbour" effects) in the primary simulation workloads that the co-location was never supposed to affect.</div></div>
+
+<div class="qa"><div class="q"><span class="qnum">19</span>Contrast the software stacks of the "Data Analytics Ecosystem" and the "Computational Science Ecosystem" at the cluster-hardware level, and explain the underlying design trade-off. <span class="tag-pill tag-exam">EXAM-STYLE</span></div>
+<div class="a">The Data Analytics ecosystem typically runs on Ethernet-switched, commodity x86 racks with local node storage — optimizing for low cost per node and horizontal elasticity, tolerating higher network latency because workloads (MapReduce/Spark-style) are designed around data-local, loosely-coupled tasks with limited cross-node synchronization. The Computational Science (HPC) ecosystem uses InfiniBand plus Ethernet, SAN plus local storage, and x86 racks augmented with GPUs/accelerators (plus in-situ processing) — optimizing for very low-latency, high-bandwidth interconnects, because tightly-coupled MPI simulations require frequent, fine-grained synchronization/communication across many nodes where network latency directly limits scalability (Amdahl's-law-style bottlenecks). The trade-off is cost vs. communication performance: HPC hardware is more expensive per node but essential for strongly-coupled numerical simulation; commodity Big Data hardware is cheaper and scales well specifically because its workloads were designed to minimize cross-node communication in the first place.</div></div>
+
+<div class="qa"><div class="q"><span class="qnum">20</span>Using the "Theories–Deduction–Predictions–Induction–Abduction–Observations" cycle, explain where HPC and HDA (Big-Data analytics) each contribute, and why real scientific workflows increasingly need both. <span class="tag-pill tag-research">RESEARCH</span></div>
+<div class="a">HPC contributes on the <b>deductive</b> side: given a theory formulated as a mathematical model, HPC executes that model (large-scale simulation) to generate predictions. HDA (High-end/High-Performance Data Analytics) contributes on the <b>inductive and abductive</b> side: assimilating predictions together with real observational data to evaluate the hypothesis (induction), and discovering patterns/anomalies in observational data to generate new explanatory hypotheses in the first place (abduction). Modern scientific discovery increasingly needs both in the same workflow — e.g., a climate model (HPC simulation) whose predictions must be continuously validated against huge, heterogeneous sensor/observation datasets (HDA), with anomalies detected in that data potentially feeding back to refine the model's theoretical assumptions. This is precisely the motivation behind convergence infrastructure (shared schedulers, shared software stacks) discussed in this lecture — neither pure HPC nor pure Big Data tooling alone is sufficient for such iterative, mixed workflows.</div></div>
+
+<h3>8.7 Cross-Cutting Synthesis Questions</h3>
+
+<div class="qa"><div class="q"><span class="qnum">21</span>Trace the evolution from Google's original MapReduce paper (2004) to Apache Flink, identifying the single biggest limitation solved at each step. <span class="tag-pill tag-research">RESEARCH</span></div>
+<div class="a"><b>MapReduce (2004):</b> introduced fault-tolerant, scale-out batch processing on commodity clusters — solving the "how do I process petabytes reliably on cheap hardware" problem, but at the cost of heavy disk I/O between every map-reduce stage. <b>Hadoop ecosystem (Hive/Pig/Giraph/etc., ~2008-2010):</b> solved the "MapReduce's map/reduce primitives are too low-level for many use cases" problem by adding higher-level languages/paradigms on the same substrate — but all still ultimately compiled down to disk-heavy MapReduce jobs. <b>Apache Spark (2010-2014):</b> solved the "iterative and interactive workloads are punishingly slow on MapReduce" problem via in-memory RDDs with lineage-based fault tolerance and a DAG scheduler — but its streaming support (added via DStreams) remained fundamentally micro-batch, so low-latency streaming was still imperfect. <b>Apache Flink:</b> solved the "streaming latency is bounded by batch-interval" problem via a native streaming runtime treating batch as bounded-stream, with exactly-once state guarantees.</div></div>
+
+<div class="qa"><div class="q"><span class="qnum">22</span>Why might an exam question frame Apache Mesos as "the Spark of scheduling"? Justify or refute this analogy. <span class="tag-pill tag-research">RESEARCH</span></div>
+<div class="a">The analogy is reasonably apt at a structural level: just as Spark provides one common in-memory execution engine (RDD/DAG) beneath multiple higher-level libraries (SQL, Streaming, GraphX, MLlib) that previously would have been separate, framework-specific systems, Mesos provides one common resource-abstraction layer beneath multiple higher-level, framework-specific schedulers (a Hadoop scheduler, an MPI scheduler, etc.) that would otherwise each need to manage cluster hardware independently. Both are examples of "unify the substrate, let specialised logic sit on top." The analogy should not be taken too literally, however: Spark unifies <i>data processing semantics</i> (a shared, optimizable data abstraction), while Mesos only unifies <i>resource offers</i> (raw CPU/memory/disk slots) — it does not attempt to unify or optimize the actual computation happening inside each framework the way Spark's Catalyst/Tungsten stack does.</div></div>
+
+<div class="qa"><div class="q"><span class="qnum">23</span>A start-up wants to build a real-time fraud-detection system processing a continuous stream of credit-card transactions with sub-100ms latency requirements, plus a nightly batch job re-training its fraud model on the full historical dataset. Which technologies from this lecture would you recommend, and why? <span class="tag-pill tag-exam">EXAM-STYLE</span></div>
+<div class="a">For the sub-100ms real-time path: <b>Apache Flink</b>, because its native/true streaming model (as opposed to Spark Streaming's micro-batching) is specifically suited to tight, tunable latency requirements, and its exactly-once state guarantees are important for a financial use case where double-counting or dropping a transaction has real consequences. For the nightly batch re-training job: either classic <b>Hadoop MapReduce</b> or, more likely today, <b>Apache Spark</b> (with MLlib), since batch retraining over the full historical dataset is not latency-critical but does benefit from Spark's in-memory, iterative-friendly engine (training algorithms like gradient descent are inherently iterative — exactly the case where Spark's in-memory caching massively outperforms disk-bound MapReduce). Underlying storage would be <b>HDFS</b> (or a cloud-native equivalent) given the "large data sets, streaming/high-throughput access" assumptions match a historical transaction archive well, with Kafka as the ingestion layer feeding both the Flink real-time path and periodic dumps into HDFS for the batch path.</div></div>
+
+<div class="qa"><div class="q"><span class="qnum">24</span>Explain, in one coherent argument, why "moving computation to data" (an HDFS design goal) and "keeping data resident in memory" (Spark's core idea) are really two instances of the same underlying principle. <span class="tag-pill tag-research">RESEARCH</span></div>
+<div class="a">Both techniques minimise the same fundamental cost: <b>moving large volumes of data across a slow channel</b> (network or disk I/O) relative to moving a comparatively tiny amount of code or keeping data where it already sits. HDFS's "move computation to data" avoids shipping large data blocks over the network by instead shipping the (small) map function to the node that already holds the relevant HDFS block. Spark's in-memory RDD caching avoids the analogous cost of repeatedly re-reading data from disk on every iteration by keeping the working set resident in RAM once it has been computed/loaded — i.e., it avoids "moving data" (from disk to memory) more than once. Both are manifestations of the general Big-Data engineering principle: <i>data movement, not computation, is usually the true bottleneck at scale</i>, so systems are designed to minimise redundant data movement (across network, or across the memory hierarchy) wherever possible.</div></div>
+
+</div><!-- end s8 -->
+
+<div class="footer-note">
+Compiled study guide based on "Digitization and Data Analytics" (Distributed Computing II, Lecture 11), TU Dresden CIDS/ZIH. All figures redrawn/paraphrased from the original slide content for study purposes.
+</div>
+
+</body>
+</html>
